@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hello on thuanc177</title>
+    <link>https://blog.thuanc177.me/tags/hello/</link>
+    <description>Recent content in Hello on thuanc177</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 01 Dec 2024 14:39:39 +0700</lastBuildDate><atom:link href="https://blog.thuanc177.me/tags/hello/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hello World</title>
+      <link>https://blog.thuanc177.me/posts/helloworld/</link>
+      <pubDate>Sun, 01 Dec 2024 14:39:39 +0700</pubDate>
+      
+      <guid>https://blog.thuanc177.me/posts/helloworld/</guid>
+      <description>&lt;p&gt;Đây là bài viết đầu tiên của tôi trên blog này. Xin chào tất cả mọi người!&lt;/p&gt;
+&lt;h3 id=&#34;giới-thiệu&#34;&gt;Giới thiệu&lt;/h3&gt;
+&lt;p&gt;Tôi là Trần Minh Thuận, một lập trình viên. Blog này sẽ là nơi tôi chia sẻ những kiến thức, kinh nghiệm và suy nghĩ của mình về công nghệ, lập trình và cuộc sống.&lt;/p&gt;
+&lt;h3 id=&#34;mục-tiêu-của-blog&#34;&gt;Mục tiêu của blog&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Chia sẻ kiến thức về lập trình và công nghệ&lt;/li&gt;
+&lt;li&gt;Ghi lại quá trình học tập và phát triển bản thân&lt;/li&gt;
+&lt;li&gt;Kết nối với cộng đồng developer&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;kết&#34;&gt;Kết&lt;/h3&gt;
+&lt;p&gt;Cảm ơn bạn đã ghé thăm blog của tôi. Hãy theo dõi để không bỏ lỡ những bài viết thú vị sắp tới nhé!&lt;/p&gt;</description>
+      <content>&lt;p&gt;Đây là bài viết đầu tiên của tôi trên blog này. Xin chào tất cả mọi người!&lt;/p&gt;
+&lt;h3 id=&#34;giới-thiệu&#34;&gt;Giới thiệu&lt;/h3&gt;
+&lt;p&gt;Tôi là Trần Minh Thuận, một lập trình viên. Blog này sẽ là nơi tôi chia sẻ những kiến thức, kinh nghiệm và suy nghĩ của mình về công nghệ, lập trình và cuộc sống.&lt;/p&gt;
+&lt;h3 id=&#34;mục-tiêu-của-blog&#34;&gt;Mục tiêu của blog&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Chia sẻ kiến thức về lập trình và công nghệ&lt;/li&gt;
+&lt;li&gt;Ghi lại quá trình học tập và phát triển bản thân&lt;/li&gt;
+&lt;li&gt;Kết nối với cộng đồng developer&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;kết&#34;&gt;Kết&lt;/h3&gt;
+&lt;p&gt;Cảm ơn bạn đã ghé thăm blog của tôi. Hãy theo dõi để không bỏ lỡ những bài viết thú vị sắp tới nhé!&lt;/p&gt;
+</content>
+    </item>
+    
+  </channel>
+</rss>
