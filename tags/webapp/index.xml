@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Webapp on thuanc177</title>
+    <link>https://blog.thuanc177.me/tags/webapp/</link>
+    <description>Recent content in Webapp on thuanc177</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 02 Dec 2024 01:40:21 +0700</lastBuildDate><atom:link href="https://blog.thuanc177.me/tags/webapp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Jotion</title>
+      <link>https://blog.thuanc177.me/posts/jotion/</link>
+      <pubDate>Mon, 02 Dec 2024 01:40:21 +0700</pubDate>
+      
+      <guid>https://blog.thuanc177.me/posts/jotion/</guid>
+      <description>&lt;h1 id=&#34;jotion-note-taking-webap&#34;&gt;Jotion Note Taking Webap&lt;/h1&gt;
+&lt;p&gt;This is a Notion Clone using Next.js 14, React, Convex, Tailwind&lt;/p&gt;
+&lt;h3 id=&#34;key-features&#34;&gt;Key Features:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Real-time database  🔗&lt;/li&gt;
+&lt;li&gt;Notion-style editor 📝&lt;/li&gt;
+&lt;li&gt;AI text generation features ✨&lt;/li&gt;
+&lt;li&gt;Light and Dark mode 🌓&lt;/li&gt;
+&lt;li&gt;Infinite children documents 🌲&lt;/li&gt;
+&lt;li&gt;Trash can &amp;amp; soft delete 🗑️&lt;/li&gt;
+&lt;li&gt;Authentication 🔐&lt;/li&gt;
+&lt;li&gt;File upload ☁️&lt;/li&gt;
+&lt;li&gt;File deletion 🗑️&lt;/li&gt;
+&lt;li&gt;File replacement 🔧&lt;/li&gt;
+&lt;li&gt;Icons for each document (changes in real-time) 🌠&lt;/li&gt;
+&lt;li&gt;Expandable sidebar ➡️🔀⬅️&lt;/li&gt;
+&lt;li&gt;Full mobile responsiveness 📱&lt;/li&gt;
+&lt;li&gt;Publish your note to the web 🌐&lt;/li&gt;
+&lt;li&gt;Fully collapsable sidebar ↕️&lt;/li&gt;
+&lt;li&gt;Landing page 🛬&lt;/li&gt;
+&lt;li&gt;Cover image of each document 🖼️&lt;/li&gt;
+&lt;li&gt;Recover deleted files 🔄📄&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Try it out from &lt;a href=&#34;https://jotion.thuanc177.me&#34;&gt;here&lt;/a&gt;&lt;/p&gt;</description>
+      <content>&lt;h1 id=&#34;jotion-note-taking-webap&#34;&gt;Jotion Note Taking Webap&lt;/h1&gt;
+&lt;p&gt;This is a Notion Clone using Next.js 14, React, Convex, Tailwind&lt;/p&gt;
+&lt;h3 id=&#34;key-features&#34;&gt;Key Features:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Real-time database  🔗&lt;/li&gt;
+&lt;li&gt;Notion-style editor 📝&lt;/li&gt;
+&lt;li&gt;AI text generation features ✨&lt;/li&gt;
+&lt;li&gt;Light and Dark mode 🌓&lt;/li&gt;
+&lt;li&gt;Infinite children documents 🌲&lt;/li&gt;
+&lt;li&gt;Trash can &amp;amp; soft delete 🗑️&lt;/li&gt;
+&lt;li&gt;Authentication 🔐&lt;/li&gt;
+&lt;li&gt;File upload ☁️&lt;/li&gt;
+&lt;li&gt;File deletion 🗑️&lt;/li&gt;
+&lt;li&gt;File replacement 🔧&lt;/li&gt;
+&lt;li&gt;Icons for each document (changes in real-time) 🌠&lt;/li&gt;
+&lt;li&gt;Expandable sidebar ➡️🔀⬅️&lt;/li&gt;
+&lt;li&gt;Full mobile responsiveness 📱&lt;/li&gt;
+&lt;li&gt;Publish your note to the web 🌐&lt;/li&gt;
+&lt;li&gt;Fully collapsable sidebar ↕️&lt;/li&gt;
+&lt;li&gt;Landing page 🛬&lt;/li&gt;
+&lt;li&gt;Cover image of each document 🖼️&lt;/li&gt;
+&lt;li&gt;Recover deleted files 🔄📄&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Try it out from &lt;a href=&#34;https://jotion.thuanc177.me&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;technology-stack&#34;&gt;Technology Stack&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ReactJS:&lt;/strong&gt; Front-end Design&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tailwind:&lt;/strong&gt; Styling with typesafe, include dark/light mode&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Convex:&lt;/strong&gt; Store documents&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;EdgeStore:&lt;/strong&gt; NoSQL database to store images and media&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Vercel:&lt;/strong&gt; Live deploy integration&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Github:&lt;/strong&gt; Version control and code management&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ChatGPT:&lt;/strong&gt; AI✨ for text generation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;-screenshots&#34;&gt;📸 Screenshots&lt;/h2&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;Interface&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;Description&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;img alt=&#34;Landing Page&#34; src=&#34;https://github.com/AtelierMizumi/Jotion/raw/main/screenshots/preview-1.png&#34;&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;strong&gt;Landing Page&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Place to greet user with basic information about the app&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;img alt=&#34;User Management&#34; src=&#34;https://github.com/AtelierMizumi/Jotion/raw/main/screenshots/preview-2.png&#34;&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;strong&gt;User Management&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Secure and feature rich user account management&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;img alt=&#34;Note Management&#34; src=&#34;https://github.com/AtelierMizumi/Jotion/raw/main/screenshots/preview-3.png&#34;&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;strong&gt;Note management&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Place to store all your notes, lectures, to-do and more&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;img alt=&#34;AI Text Generation&#34; src=&#34;https://github.com/AtelierMizumi/Jotion/raw/main/screenshots/preview-4.png&#34;&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;&lt;strong&gt;AI Text Generation&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;Do more than just writing with integrated Artifical Inteligence&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+&lt;p&gt;Before you begin, ensure you have the following installed:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Node.js (version 20 or higher)&lt;/li&gt;
+&lt;li&gt;npm as package manager&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;cloning-the-repository&#34;&gt;Cloning the repository&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone https://github.com/AtelierMizumi/Jotion
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;install-packages&#34;&gt;Install packages&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;npm install
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;setup-env-file&#34;&gt;Setup .env file&lt;/h3&gt;
+&lt;h3 id=&#34;you-need-to-create-convex-clerk-and-edge-store-account-to-get-needed-keys&#34;&gt;You need to create Convex, Clerk and Edge-Store account to get needed keys&lt;/h3&gt;
+&lt;h3 id=&#34;you-also-need-to-create-a-jwt-template-in-clerk-and-update-convexauthconfigjs-according-to-the-doc&#34;&gt;You also need to create a JWT Template in Clerk and update /convex/auth.config.js according to the doc&lt;/h3&gt;
+&lt;h3 id=&#34;you-should-keep-convex_deployment-and-next_public_convex_url-empty&#34;&gt;You should keep CONVEX_DEPLOYMENT and NEXT_PUBLIC_CONVEX_URL empty&lt;/h3&gt;
+&lt;h3 id=&#34;if-you-want-the-ai-button-feature-to-be-enabled-you-must-have-a-valid-openapi-key&#34;&gt;If you want the AI button feature to be enabled, you must have a valid OpenAPI key&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Read .env.sample.local for instructions
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// This will be used for `npx convex dev`
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;CONVEX_DEPLOYMENT&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;CONVEX_DEPLOY_KEY&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;NEXT_PUBLIC_CONVEX_URL&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;AUTH_DOMAIN&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;CLERK_SECRET_KEY&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;EDGE_STORE_ACCESS_KEY&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;EDGE_STORE_SECRET_KEY&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;OPENAI_API_KEY&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;setup-convex-to-generate-nosql-schematics&#34;&gt;Setup Convex to generate NoSQL schematics&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;npx convex dev
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;start-the-app&#34;&gt;Start the app&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;npm run dev
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;-licence&#34;&gt;📄 Licence&lt;/h2&gt;
+&lt;p&gt;This project is licenced under the MIT Licence - see the &lt;a href=&#34;LICENSE&#34;&gt;LICENCE&lt;/a&gt; file for details.&lt;/p&gt;
+&lt;h2 id=&#34;-contact&#34;&gt;👥 Contact&lt;/h2&gt;
+&lt;h3 id=&#34;trần-minh-thuận&#34;&gt;Trần Minh Thuận&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;GitHub: &lt;a href=&#34;https://github.com/AtelierMizumi&#34;&gt;AtelierMizumi&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Email: &lt;a href=&#34;https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=someone@example.com&amp;su=SUBJECT&amp;body=BODY&amp;bcc=thuanc177@gmail.com&#34;&gt;thuanc177@gmail.com&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    </item>
+    
+  </channel>
+</rss>

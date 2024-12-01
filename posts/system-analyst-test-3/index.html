@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>System Analyst Test 3 :: thuanc177</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Tổng hợp câu hỏi và đáp án về các loại sơ đồ UML: Use Case, Activity, Class và Sequence Diagram" />
+<meta name="keywords" content="use case diagram, activity diagram, class diagram, sequence diagram" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="https://blog.thuanc177.me/posts/system-analyst-test-3/" />
+
+
+
+
+
+  
+  <link rel="stylesheet" href="https://blog.thuanc177.me/css/buttons.min.2bc533403a27dfe0e93105a92502b42ce4587e2e4a87d9f7d349e51e16e09478.css">
+
+  
+  <link rel="stylesheet" href="https://blog.thuanc177.me/css/code.min.00125962708925857e7b66dbc58391d55be1191a3d0ce2034de8c9cd2c481c36.css">
+
+  
+  <link rel="stylesheet" href="https://blog.thuanc177.me/css/fonts.min.4881f0c525f3ce2a1864fb6e96676396cebe1e6fcef1933e8e1dde7041004fb5.css">
+
+  
+  <link rel="stylesheet" href="https://blog.thuanc177.me/css/footer.min.2e3eb191baee58dd05a9f0104ac1fab0827bca7c64dafe0b2579f934c33a1d69.css">
+
+  
+  <link rel="stylesheet" href="https://blog.thuanc177.me/css/gist.min.a751e8b0abe1ba8bc53ced52a38b19d8950fe78ca29454ea8c2595cf26aad5c0.css">
+
+  
+  <link rel="stylesheet" href="https://blog.thuanc177.me/css/header.min.b6fb4423cf82a9f9d7abc9cd010223fa3d70a6526a3f28f8e17d814c06e18f9e.css">
+
+  
+  <link rel="stylesheet" href="https://blog.thuanc177.me/css/main.min.fe8dc560fccb53a458b0db19ccb7b265764ac46b68596b7e099c6793054dd457.css">
+
+  
+  <link rel="stylesheet" href="https://blog.thuanc177.me/css/menu.min.83637a90d903026bc280d3f82f96ceb06c5fc72b7c1a8d686afb5bbf818a29f7.css">
+
+  
+  <link rel="stylesheet" href="https://blog.thuanc177.me/css/pagination.min.82f6400eae7c7c6dc3c866733c2ec0579e4089608fea69400ff85b3880aa0d3c.css">
+
+  
+  <link rel="stylesheet" href="https://blog.thuanc177.me/css/post.min.fc74ca360273c1d828da3c02b8174eba435607b369d98418ccc6f2243cd4e75d.css">
+
+  
+  <link rel="stylesheet" href="https://blog.thuanc177.me/css/prism.min.9023bbc24533d09e97a51a0a42a5a7bfe4c591ae167c5551fb1d2191d11977c0.css">
+
+  
+  <link rel="stylesheet" href="https://blog.thuanc177.me/css/syntax.min.cc789ed9377260d7949ea4c18781fc58959a89287210fe4edbff44ebfc1511b6.css">
+
+  
+  <link rel="stylesheet" href="https://blog.thuanc177.me/css/terminal.min.dd0bf9c7cacb24c1b0184f52f1869b274e06689557468cc7030ccf632328eb97.css">
+
+  
+  <link rel="stylesheet" href="https://blog.thuanc177.me/css/terms.min.b81791663c3790e738e571cdbf802312390d30e4b1d8dc9d814a5b5454d0ac11.css">
+
+
+<link rel="stylesheet" href="https://blog.thuanc177.me/terminal.css">
+
+
+
+
+<link rel="shortcut icon" href="https://blog.thuanc177.me/favicon.png">
+<link rel="apple-touch-icon" href="https://blog.thuanc177.me/apple-touch-icon.png">
+
+
+<meta name="twitter:card" content="summary" />
+
+  
+    <meta name="twitter:site" content="" />
+  
+    <meta name="twitter:creator" content="System Analyst" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="System Analyst Test 3">
+<meta property="og:description" content="Tổng hợp câu hỏi và đáp án về các loại sơ đồ UML: Use Case, Activity, Class và Sequence Diagram" />
+<meta property="og:url" content="https://blog.thuanc177.me/posts/system-analyst-test-3/" />
+<meta property="og:site_name" content="thuanc177" />
+
+  <meta property="og:image" content="https://blog.thuanc177.me/og-image.png">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2024-12-02 02:21:17 &#43;0700 &#43;07" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+
+
+<div class="container center">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    thuanc177
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+        
+          <li><a href="/showcase">Showcase</a></li>
+        
+      
+      
+        <hr />
+        
+          <li>
+            <a href="https://blog.thuanc177.me/">English</a>
+          </li>
+        
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+      <ul class="menu menu--desktop menu--language-selector">
+  <li class="menu__trigger">English&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        <li><a href="https://blog.thuanc177.me/">English</a></li>
+      
+    </ul>
+  </li>
+</ul>
+
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="/about" >About</a></li>
+        
+      
+        
+          <li><a href="/showcase" >Showcase</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="https://blog.thuanc177.me/posts/system-analyst-test-3/">System Analyst Test 3</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2024-12-02</time><span class="post-author">System Analyst</span><span class="post-reading-time">15 min read (3022 words)</span></div>
+
+  
+    <span class="post-tags">
+      
+      #<a href="https://blog.thuanc177.me/tags/system-analyst/">system-analyst</a>&nbsp;
+      
+      #<a href="https://blog.thuanc177.me/tags/uml/">uml</a>&nbsp;
+      
+      #<a href="https://blog.thuanc177.me/tags/diagram/">diagram</a>&nbsp;
+      
+    </span>
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="use-case-diagram">Use Case Diagram<a href="#use-case-diagram" class="hanchor" ariaLabel="Anchor">#</a> </h1>
+<h2 id="câu-hỏi-và-đáp-án">Câu hỏi và đáp án<a href="#câu-hỏi-và-đáp-án" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<ol>
+<li>
+<p><strong>Câu hỏi</strong>: Sơ đồ Use Case mô tả:</p>
+<ul>
+<li>a) Cấu trúc dữ liệu của hệ thống</li>
+<li><strong>b) Các chức năng và tương tác giữa actors và hệ thống</strong> ✓</li>
+<li>c) Các trạng thái của một đối tượng</li>
+<li>d) Quá trình thực thi của hệ thống</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Các thành phần chính của sơ đồ Use Case là:</p>
+<ul>
+<li>a) Classes và Objects</li>
+<li><strong>b) Use Cases và Actors</strong> ✓</li>
+<li>c) Components và Packages</li>
+<li>d) States và Transitions</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Actor trong sơ đồ Use Case đại diện cho:</p>
+<ul>
+<li>a) Một thành phần hệ thống</li>
+<li><strong>b) Một người, hệ thống, hoặc tổ chức bên ngoài và tương tác với hệ thống</strong> ✓</li>
+<li>c) Một chức năng nội bộ của hệ thống</li>
+<li>d) Một bước trong quy trình</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Use Case trong sơ đồ Use Case đại diện cho:</p>
+<ul>
+<li>a) Một đối tượng trong hệ thống</li>
+<li>b) Một luồng dữ liệu</li>
+<li><strong>c) Một chức năng hoặc dịch vụ được cung cấp bởi hệ thống</strong> ✓</li>
+<li>d) Giao diện người dùng</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Mối quan hệ &ldquo;Include&rdquo; được sử dụng để:</p>
+<ul>
+<li><strong>a) Chỉ ra rằng một Use Case phụ thuộc vào một Use Case khác</strong> ✓</li>
+<li>b) Mô tả một chức năng tùy chọn</li>
+<li>c) Tách biệt các chức năng không liên quan</li>
+<li>d) Luôn bao gồm một chức năng từ một Use Case khác</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Mối quan hệ &ldquo;Extend&rdquo; được sử dụng khi:</p>
+<ul>
+<li><strong>a) Một Use Case cần mở rộng một Use Case khác dưới các điều kiện cụ thể</strong> ✓</li>
+<li>b) Hai Use Case luôn phụ thuộc lẫn nhau</li>
+<li>c) Một Actor thực hiện nhiều Use Case</li>
+<li>d) Một Use Case bao gồm tất cả các chức năng của một Use Case khác</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Một Actor có thể là:</p>
+<ul>
+<li><strong>a) Một người dùng hoặc một hệ thống bên ngoài</strong> ✓</li>
+<li>b) Một đối tượng trong cơ sở dữ liệu</li>
+<li>c) Một quy trình nội bộ của hệ thống</li>
+<li>d) Một mối quan hệ giữa các chức năng</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Một Actor có thể tương tác với:</p>
+<ul>
+<li><strong>a) Một hoặc nhiều Use Case</strong> ✓</li>
+<li>b) Chỉ một Use Case</li>
+<li>c) Một Use Case thông qua một Actor khác</li>
+<li>d) Chỉ với các Actor khác</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Sơ đồ Use Case chủ yếu tập trung vào:</p>
+<ul>
+<li>a) Cấu trúc dữ liệu</li>
+<li>b) Luồng công việc</li>
+<li><strong>c) Hành vi của hệ thống đối với người dùng</strong> ✓</li>
+<li>d) Tương tác đối tượng</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Use Case được biểu diễn trong sơ đồ bằng:</p>
+<ul>
+<li>a) Hình chữ nhật</li>
+<li><strong>b) Hình oval</strong> ✓</li>
+<li>c) Hình thoi</li>
+<li>d) Hình vuông</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Actor trong sơ đồ Use Case được biểu diễn bằng:</p>
+<ul>
+<li><strong>a) Hình người que</strong> ✓</li>
+<li>b) Hình chữ nhật</li>
+<li>c) Hình oval</li>
+<li>d) Hình tam giác</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Hệ thống trong sơ đồ Use Case được biểu diễn bằng:</p>
+<ul>
+<li>a) Hình vuông</li>
+<li><strong>b) Hình chữ nhật</strong> ✓</li>
+<li>c) Hình oval</li>
+<li>d) Hình tròn</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Mối quan hệ giữa Use Case và Actor được biểu diễn bằng:</p>
+<ul>
+<li>a) Mũi tên hai chiều</li>
+<li><strong>b) Đường thẳng không có mũi tên</strong> ✓</li>
+<li>c) Mũi tên một chiều</li>
+<li>d) Đường cong</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Khi nào nên sử dụng sơ đồ Use Case?</p>
+<ul>
+<li>a) Khi thiết kế cơ sở dữ liệu</li>
+<li><strong>b) Khi mô tả các chức năng của hệ thống và tương tác bên ngoài</strong> ✓</li>
+<li>c) Khi xác định các trạng thái của một đối tượng</li>
+<li>d) Khi mô hình hóa kiến trúc vật lý</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Trong sơ đồ Use Case, mối quan hệ giữa hai Use Case có thể là:</p>
+<ul>
+<li><strong>a) Include, Extend, Generalization</strong> ✓</li>
+<li>b) Association, Dependency, Aggregation</li>
+<li>c) Transition, State, Event</li>
+<li>d) Collaboration, Sequence, Activity</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Mối quan hệ &ldquo;Generalization&rdquo; giữa các Actor có nghĩa là:</p>
+<ul>
+<li><strong>a) Một Actor có thể thực hiện tất cả các chức năng của một Actor khác</strong> ✓</li>
+<li>b) Hai Actor không liên quan</li>
+<li>c) Một Actor có thể mở rộng hoặc chỉ định các chức năng của một Actor khác</li>
+<li>d) Một Actor chỉ thực hiện một Use Case</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Mối quan hệ &ldquo;Generalization&rdquo; giữa các Use Case có nghĩa là:</p>
+<ul>
+<li>a) Một Use Case có thể thay thế một Use Case khác</li>
+<li><strong>b) Một Use Case chỉ định hoặc mở rộng hành vi của một Use Case khác</strong> ✓</li>
+<li>c) Hai Use Case không liên quan</li>
+<li>d) Một Use Case phải luôn được thực hiện trước một Use Case khác</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Trong giai đoạn nào của phát triển phần mềm, sơ đồ Use Case thường được sử dụng?</p>
+<ul>
+<li>a) Thiết kế</li>
+<li>b) Lập trình</li>
+<li><strong>c) Phân tích yêu cầu</strong> ✓</li>
+<li>d) Kiểm thử</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Một Actor có thể:</p>
+<ul>
+<li>a) Chỉ thực hiện một Use Case</li>
+<li><strong>b) Thực hiện nhiều Use Case khác nhau</strong> ✓</li>
+<li>c) Tạo đối tượng trong hệ thống</li>
+<li>d) Không tương tác trực tiếp với hệ thống</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Mục đích chính của sơ đồ Use Case là:</p>
+<ul>
+<li>a) Mô tả chi tiết logic và quy trình của hệ thống</li>
+<li><strong>b) Cung cấp cái nhìn tổng quan về cách hệ thống đáp ứng yêu cầu của người dùng</strong> ✓</li>
+<li>c) Mô hình hóa mối quan hệ giữa các lớp trong hệ thống</li>
+<li>d) Biểu diễn luồng dữ liệu qua các thành phần khác nhau</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Sơ đồ Use Case thường được sử dụng để giao tiếp giữa:</p>
+<ul>
+<li>a) Lập trình viên và cơ sở dữ liệu</li>
+<li><strong>b) Nhà phân tích và khách hàng</strong> ✓</li>
+<li>c) Nhà thiết kế và hệ thống phần cứng</li>
+<li>d) Lập trình viên và mạng</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Mối quan hệ &ldquo;Include&rdquo; giúp:</p>
+<ul>
+<li>a) Loại bỏ các chức năng không cần thiết</li>
+<li>b) Kết nối các Actor với hệ thống</li>
+<li><strong>c) Tái sử dụng chức năng chung giữa các Use Case</strong> ✓</li>
+<li>d) Thêm một Use Case tùy chọn</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Use Case đại diện cho:</p>
+<ul>
+<li><strong>a) Một tập hợp các bước hoặc hành động để đạt được một mục tiêu cụ thể</strong> ✓</li>
+<li>b) Một đối tượng hoặc lớp trong hệ thống</li>
+<li>c) Một trạng thái cụ thể của hệ thống</li>
+<li>d) Một tài liệu kỹ thuật</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Trong sơ đồ Use Case, hệ thống được giới hạn bởi:</p>
+<ul>
+<li>a) Một tập hợp các Actor</li>
+<li><strong>b) Một ranh giới hệ thống</strong> ✓</li>
+<li>c) Một tập hợp các trạng thái</li>
+<li>d) Một tập hợp các sự kiện</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Một Use Case có thể được chi tiết hóa thêm bằng:</p>
+<ul>
+<li><strong>a) Sequence Diagram</strong> ✓</li>
+<li>b) Class Diagram</li>
+<li>c) State Diagram</li>
+<li>d) Object Diagram</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Mục đích của ranh giới hệ thống trong sơ đồ Use Case là:</p>
+<ul>
+<li><strong>a) Xác định phạm vi tương tác của người dùng trong hệ thống</strong> ✓</li>
+<li>b) Hạn chế hành động của các Actor bên ngoài hệ thống</li>
+<li>c) Giới hạn việc thực thi các Use Case cụ thể</li>
+<li>d) Tách biệt các quy trình nội bộ khỏi các mạng bên ngoài</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Mối quan hệ &ldquo;Extend&rdquo; chủ yếu được sử dụng để:</p>
+<ul>
+<li><strong>a) Thêm chức năng vào một Use Case dưới các điều kiện nhất định</strong> ✓</li>
+<li>b) Thay thế một Actor bằng một Actor chuyên biệt hơn</li>
+<li>c) Định nghĩa một mối quan hệ bắt buộc giữa các Use Case</li>
+<li>d) Đảm bảo hai Use Case luôn được thực hiện cùng nhau</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Nếu nhiều Actor tương tác với cùng một Use Case, điều này chỉ ra rằng:</p>
+<ul>
+<li>a) Tất cả các Actor đều là các phiên bản của cùng một vai trò</li>
+<li>b) Use Case là trừu tượng và không cụ thể cho bất kỳ Actor nào</li>
+<li><strong>c) Use Case cung cấp một chức năng cần thiết cho nhiều vai trò</strong> ✓</li>
+<li>d) Một lỗi thiết kế, vì Use Case nên có các Actor duy nhất</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Khi phân tích Use Case, mục tiêu chính là:</p>
+<ul>
+<li>a) Xác định các hạn chế và giới hạn của hệ thống</li>
+<li>b) Chỉ định các yêu cầu kỹ thuật cho việc lập trình</li>
+<li><strong>c) Hiểu các yêu cầu từ góc độ của người dùng</strong> ✓</li>
+<li>d) Định nghĩa các phụ thuộc phần cứng và giao thức mạng</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Mối quan hệ &ldquo;Generalization&rdquo; giữa các Use Case có thể giúp:</p>
+<ul>
+<li><strong>a) Tạo các Use Case trừu tượng mà các Use Case khác kế thừa hoặc chuyên biệt hóa</strong> ✓</li>
+<li>b) Hợp nhất hai Use Case thành một chức năng thống nhất</li>
+<li>c) Tăng cường bảo mật của hệ thống thông qua hệ thống phân cấp vai trò</li>
+<li>d) Loại bỏ sự dư thừa trong định nghĩa Actor</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Mô tả Use Case bao gồm các điều kiện tiên quyết, luồng chính và luồng thay thế nhằm:</p>
+<ul>
+<li>a) Làm rõ xử lý nội bộ chi tiết của hệ thống</li>
+<li><strong>b) Phác thảo các đường dẫn có thể trong một Use Case dựa trên các điều kiện</strong> ✓</li>
+<li>c) Đảm bảo rằng chỉ có một đường dẫn thực thi là hợp lệ</li>
+<li>d) Hạn chế tương tác của Actor với các luồng chính</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Câu nào sau đây là đúng về hệ thống phân cấp Actor trong sơ đồ Use Case?</p>
+<ul>
+<li>a) Actor không thể là một phần của hệ thống phân cấp trong sơ đồ Use Case</li>
+<li><strong>b) Các Actor có mối quan hệ &ldquo;Generalization&rdquo; chia sẻ các Use Case được kế thừa</strong> ✓</li>
+<li>c) Mỗi cấp độ hệ thống phân cấp Actor đại diện cho một lớp hệ thống</li>
+<li>d) Các Actor phân cấp thực hiện các Use Case hoàn toàn không liên quan</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Mục đích của việc tạo sơ đồ Use Case trong giai đoạn Phân tích Yêu cầu là:</p>
+<ul>
+<li>a) Xác nhận mô hình vật lý của hệ thống</li>
+<li>b) Xác định chi tiết các lớp và phương thức hướng đối tượng</li>
+<li><strong>c) Truyền đạt cách hệ thống đáp ứng yêu cầu của người dùng</strong> ✓</li>
+<li>d) Thiết kế bố cục mạng và phần cứng cấp thấp</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Nếu một sơ đồ Use Case có nhiều mối quan hệ &ldquo;Include&rdquo;, điều này ngụ ý rằng:</p>
+<ul>
+<li>a) Hệ thống có chức năng dư thừa</li>
+<li><strong>b) Hệ thống có tính mô-đun và tái sử dụng chức năng chung</strong> ✓</li>
+<li>c) Các Actor bị hạn chế đối với các Use Case cụ thể</li>
+<li>d) Hệ thống thiếu tính linh hoạt trong chức năng</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Trong một hệ thống lớn với nhiều Use Case, việc nhóm các Use Case liên quan giúp:</p>
+<ul>
+<li>a) Tăng cường tính độc lập của các Actor</li>
+<li><strong>b) Đơn giản hóa sơ đồ và tập trung vào chức năng cấp cao</strong> ✓</li>
+<li>c) Hạn chế quyền truy cập của Actor vào các nhóm Use Case cụ thể</li>
+<li>d) Chi tiết hóa kiến trúc hệ thống chính xác hơn</li>
+</ul>
+</li>
+</ol>
+<h1 id="activity-diagram">Activity Diagram<a href="#activity-diagram" class="hanchor" ariaLabel="Anchor">#</a> </h1>
+<h2 id="câu-hỏi-và-đáp-án-1">Câu hỏi và đáp án<a href="#câu-hỏi-và-đáp-án-1" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<ol>
+<li>
+<p><strong>Câu hỏi</strong>: Sơ đồ Activity đại diện cho:</p>
+<ul>
+<li>a) Các trạng thái của một đối tượng</li>
+<li><strong>b) Quy trình hoặc luồng công việc</strong> ✓</li>
+<li>c) Mối quan hệ giữa các lớp</li>
+<li>d) Giao diện người dùng</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Sơ đồ Activity được sử dụng để:</p>
+<ul>
+<li>a) Mô tả các chức năng của hệ thống</li>
+<li><strong>b) Mô hình hóa các luồng công việc và quy trình</strong> ✓</li>
+<li>c) Biểu diễn các đối tượng và lớp</li>
+<li>d) Định nghĩa các sự kiện và hành động</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Cái nào sau đây không phải là một phần của sơ đồ Activity?</p>
+<ul>
+<li>a) Swimlane</li>
+<li>b) Decision node</li>
+<li><strong>c) Class</strong> ✓</li>
+<li>d) Action node</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Trong sơ đồ Activity, swimlane được sử dụng để:</p>
+<ul>
+<li>a) Mô tả các hành động theo thứ tự thời gian</li>
+<li><strong>b) Phân chia trách nhiệm giữa các actor hoặc hệ thống khác nhau</strong> ✓</li>
+<li>c) Hiển thị trạng thái của một đối tượng</li>
+<li>d) Biểu diễn mối quan hệ giữa các lớp</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Một hành động trong sơ đồ Activity được biểu diễn bằng:</p>
+<ul>
+<li><strong>a) Hình chữ nhật</strong> ✓</li>
+<li>b) Hình oval</li>
+<li>c) Hình thoi</li>
+<li>d) Hình tròn</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Điểm bắt đầu của sơ đồ Activity được biểu diễn bằng:</p>
+<ul>
+<li><strong>a) Một vòng tròn đen nhỏ</strong> ✓</li>
+<li>b) Hình chữ nhật</li>
+<li>c) Hình oval</li>
+<li>d) Hình thoi</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Node quyết định trong sơ đồ Activity được biểu diễn bằng:</p>
+<ul>
+<li>a) Hình chữ nhật</li>
+<li>b) Hình tròn</li>
+<li><strong>c) Hình thoi</strong> ✓</li>
+<li>d) Hình tam giác</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Node fork trong sơ đồ Activity đại diện cho:</p>
+<ul>
+<li>a) Bắt đầu của một hành động</li>
+<li>b) Kết thúc của một quy trình</li>
+<li><strong>c) Chia luồng công việc thành các luồng song song</strong> ✓</li>
+<li>d) Hợp nhất nhiều luồng công việc thành một</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Node merge trong sơ đồ Activity đại diện cho:</p>
+<ul>
+<li>a) Bắt đầu một quy trình mới</li>
+<li>b) Kết thúc một hành động</li>
+<li><strong>c) Kết hợp nhiều luồng công việc thành một</strong> ✓</li>
+<li>d) Chia một luồng công việc</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Sơ đồ Activity thường được sử dụng trong giai đoạn nào của phát triển phần mềm?</p>
+<ul>
+<li>a) Lập trình</li>
+<li><strong>b) Phân tích và thiết kế</strong> ✓</li>
+<li>c) Kiểm thử</li>
+<li>d) Bảo trì</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Một sự kiện trong sơ đồ Activity đại diện cho:</p>
+<ul>
+<li>a) Một hành động</li>
+<li><strong>b) Một điều kiện hoặc sự kiện xảy ra trong quy trình</strong> ✓</li>
+<li>c) Một đối tượng</li>
+<li>d) Một trạng thái</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Sơ đồ Activity có thể được sử dụng để mô hình hóa:</p>
+<ul>
+<li>a) Các trạng thái của một đối tượng</li>
+<li>b) Cấu trúc hệ thống</li>
+<li><strong>c) Các quy trình kinh doanh phức tạp</strong> ✓</li>
+<li>d) Mối quan hệ giữa các lớp</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Kết thúc của sơ đồ Activity được biểu diễn bằng:</p>
+<ul>
+<li>a) Hình chữ nhật</li>
+<li>b) Hình thoi</li>
+<li><strong>c) Một vòng tròn đen được bao quanh bởi một vòng tròn khác</strong> ✓</li>
+<li>d) Hình oval</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Mối quan hệ giữa các hành động trong sơ đồ Activity được biểu diễn bằng:</p>
+<ul>
+<li>a) Đường cong</li>
+<li><strong>b) Đường thẳng có mũi tên</strong> ✓</li>
+<li>c) Đường gạch ngang</li>
+<li>d) Đường đôi</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Trong sơ đồ Activity, &ldquo;Guard&rdquo; được sử dụng để:</p>
+<ul>
+<li>a) Bắt đầu một quy trình</li>
+<li><strong>b) Biểu diễn một điều kiện cho một quyết định hoặc luồng chuyển tiếp</strong> ✓</li>
+<li>c) Kết thúc một hành động</li>
+<li>d) Chia một luồng công việc</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Các hoạt động song song trong sơ đồ Activity được biểu diễn bằng:</p>
+<ul>
+<li>a) Node quyết định</li>
+<li><strong>b) Node fork và join</strong> ✓</li>
+<li>c) Node merge</li>
+<li>d) Node hành động</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Sơ đồ Activity có thể mô hình hóa:</p>
+<ul>
+<li>a) Use Case chi tiết</li>
+<li>b) Trạng thái đối tượng</li>
+<li>c) Mối quan hệ lớp</li>
+<li><strong>d) Cấu trúc vật lý của hệ thống</strong> ✓</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Luồng hành động trong sơ đồ Activity đại diện cho:</p>
+<ul>
+<li>a) Các lớp và đối tượng</li>
+<li>b) Luồng dữ liệu</li>
+<li><strong>c) Kết nối giữa các hành động</strong> ✓</li>
+<li>d) Trạng thái của một đối tượng</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Sơ đồ Activity có thể mô hình hóa các quy trình:</p>
+<ul>
+<li>a) Đơn luồng</li>
+<li><strong>b) Đa luồng</strong> ✓</li>
+<li>c) Chỉ các luồng công việc nội bộ hệ thống</li>
+<li>d) Chỉ các lớp và đối tượng</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Swimlane trong sơ đồ Activity giúp:</p>
+<ul>
+<li><strong>a) Phân biệt trách nhiệm của các thực thể khác nhau</strong> ✓</li>
+<li>b) Hiển thị các trạng thái khác nhau</li>
+<li>c) Mô tả các lớp trong hệ thống</li>
+<li>d) Biểu diễn các sự kiện theo thời gian</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Sơ đồ Activity có thể được sử dụng để mô hình hóa:</p>
+<ul>
+<li><strong>a) Các quy trình kinh doanh</strong> ✓</li>
+<li>b) Cấu trúc hệ thống phần cứng</li>
+<li>c) Giao diện người dùng</li>
+<li>d) Các đối tượng trong cơ sở dữ liệu</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Trong sơ đồ Activity, điều kiện cho chuyển tiếp giữa các hành động được gọi là:</p>
+<ul>
+<li>a) Hành động</li>
+<li><strong>b) Điều kiện bảo vệ (Guard condition)</strong> ✓</li>
+<li>c) Fork</li>
+<li>d) Sự kiện</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Sự khác biệt chính giữa Fork và Join trong sơ đồ Activity là gì?</p>
+<ul>
+<li>a) Fork kết hợp các luồng, Join chia các luồng</li>
+<li><strong>b) Fork chia các luồng, Join kết hợp các luồng</strong> ✓</li>
+<li>c) Cả Fork và Join đều chia các luồng</li>
+<li>d) Cả Fork và Join đều kết hợp các luồng</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Sơ đồ Activity thường không bao gồm:</p>
+<ul>
+<li><strong>a) Các lớp và đối tượng</strong> ✓</li>
+<li>b) Các hành động và quyết định</li>
+<li>c) Điểm bắt đầu và kết thúc</li>
+<li>d) Luồng chuyển tiếp</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: &ldquo;Node quyết định&rdquo; trong sơ đồ Activity đại diện cho:</p>
+<ul>
+<li>a) Bắt đầu của một quy trình</li>
+<li>b) Kết thúc của một quy trình</li>
+<li><strong>c) Điểm quyết định để chọn luồng tiếp theo</strong> ✓</li>
+<li>d) Điểm hợp nhất của các luồng</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Swimlane trong sơ đồ Activity có thể đại diện cho:</p>
+<ul>
+<li>a) Một quy trình đơn lẻ</li>
+<li><strong>b) Một tổ chức hoặc phòng ban cụ thể chịu trách nhiệm cho một phần của quy trình</strong> ✓</li>
+<li>c) Mối quan hệ giữa các lớp</li>
+<li>d) Một trạng thái cụ thể của hệ thống</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Trong sơ đồ Activity, node &ldquo;Join&rdquo; được sử dụng để:</p>
+<ul>
+<li>a) Bắt đầu một quy trình mới</li>
+<li>b) Kết thúc một hành động</li>
+<li><strong>c) Hợp nhất các luồng công việc song song</strong> ✓</li>
+<li>d) Chia một luồng công việc thành nhiều luồng</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Trong sơ đồ Activity, sự kiện kết thúc được biểu diễn bằng:</p>
+<ul>
+<li>a) Một vòng tròn nhỏ</li>
+<li><strong>b) Một vòng tròn đen được bao quanh bởi một vòng tròn khác</strong> ✓</li>
+<li>c) Hình chữ nhật</li>
+<li>d) Hình thoi</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Cái nào sau đây không được mô hình hóa trong sơ đồ Activity?</p>
+<ul>
+<li>a) Trình tự các hành động</li>
+<li><strong>b) Luồng dữ liệu giữa các hệ thống</strong> ✓</li>
+<li>c) Các quyết định có điều kiện</li>
+<li>d) Trạng thái đối tượng theo thời gian</li>
+</ul>
+</li>
+<li>
+<p><strong>Câu hỏi</strong>: Sơ đồ Activity khác với sơ đồ trạng thái như thế nào?</p>
+<ul>
+<li>a) Sơ đồ Activity tập trung vào trạng thái của một đối tượng, trong khi sơ đồ trạng thái tập trung vào luồng công việc</li>
+<li><strong>b) Sơ đồ Activity tập trung vào luồng công việc hoặc quy trình, trong khi sơ đồ trạng thái tập trung vào trạng thái của một đối tượng</strong> ✓</li>
+<li>c) Sơ đồ Activity chỉ được sử dụng cho các hệ thống nhỏ, trong khi sơ đồ trạng thái được sử dụng cho các hệ thống lớn</li>
+<li>d) Sơ đồ Activity và sơ đồ trạng thái hoàn toàn giống nhau</li>
+</ul>
+</li>
+</ol>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+  <div class="pagination__title">
+    <span class="pagination__title-h">Read other posts</span>
+    <hr />
+  </div>
+  <div class="pagination__buttons">
+    
+    
+    
+      <a href="https://blog.thuanc177.me/posts/system-analyst-test-1/" class="button inline next">
+        System Analyst Test 1 - Use Case &amp; Activity Diagram
+      </a>
+    
+  </div>
+</div>
+
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2024 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+
+
+
+  
+</div>
+
+</body>
+</html>

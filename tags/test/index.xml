@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Test on thuanc177</title>
+    <link>https://blog.thuanc177.me/tags/test/</link>
+    <description>Recent content in Test on thuanc177</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 02 Dec 2024 02:05:24 +0700</lastBuildDate><atom:link href="https://blog.thuanc177.me/tags/test/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>System Analyst Test 1 - Use Case &amp; Activity Diagram</title>
+      <link>https://blog.thuanc177.me/posts/system-analyst-test-1/</link>
+      <pubDate>Mon, 02 Dec 2024 02:05:24 +0700</pubDate>
+      
+      <guid>https://blog.thuanc177.me/posts/system-analyst-test-1/</guid>
+      <description>&lt;h2 id=&#34;use-case-diagram-questions&#34;&gt;Use Case Diagram Questions&lt;/h2&gt;
+&lt;h3 id=&#34;1-in-a-use-case-diagram-what-does-the-oval-shape-represent&#34;&gt;1. In a use case diagram, what does the oval shape represent?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Answer: B. A use case&lt;/strong&gt;&lt;br&gt;
+Hình oval trong use case diagram đại diện cho một use case - một chức năng hoặc hành động mà hệ thống thực hiện.&lt;/p&gt;
+&lt;h3 id=&#34;2-which-of-the-following-describes-a-relationship-between-an-actor-and-a-use-case&#34;&gt;2. Which of the following describes a relationship between an actor and a use case?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Answer: A. Association&lt;/strong&gt;&lt;br&gt;
+Association thể hiện mối quan hệ giữa actor và use case, cho biết actor tương tác với use case nào.&lt;/p&gt;</description>
+      <content>&lt;h2 id=&#34;use-case-diagram-questions&#34;&gt;Use Case Diagram Questions&lt;/h2&gt;
+&lt;h3 id=&#34;1-in-a-use-case-diagram-what-does-the-oval-shape-represent&#34;&gt;1. In a use case diagram, what does the oval shape represent?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Answer: B. A use case&lt;/strong&gt;&lt;br&gt;
+Hình oval trong use case diagram đại diện cho một use case - một chức năng hoặc hành động mà hệ thống thực hiện.&lt;/p&gt;
+&lt;h3 id=&#34;2-which-of-the-following-describes-a-relationship-between-an-actor-and-a-use-case&#34;&gt;2. Which of the following describes a relationship between an actor and a use case?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Answer: A. Association&lt;/strong&gt;&lt;br&gt;
+Association thể hiện mối quan hệ giữa actor và use case, cho biết actor tương tác với use case nào.&lt;/p&gt;
+&lt;h3 id=&#34;3-what-type-of-relationship-is-depicted-by-a-dashed-arrow-labeled-include-in-a-use-case-diagram&#34;&gt;3. What type of relationship is depicted by a dashed arrow labeled &amp;laquo;include&amp;raquo; in a use case diagram?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Answer: C. An included use case that must be executed&lt;/strong&gt;&lt;br&gt;
+Mối quan hệ &amp;laquo;include&amp;raquo; chỉ ra rằng use case được include phải được thực thi khi use case gốc được thực hiện.&lt;/p&gt;
+&lt;h3 id=&#34;4-what-does-the-extend-relationship-indicate-in-a-use-case-diagram&#34;&gt;4. What does the &amp;laquo;extend&amp;raquo; relationship indicate in a use case diagram?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Answer: C. The base use case can be conditionally extended by another use case&lt;/strong&gt;&lt;br&gt;
+Mối quan hệ &amp;laquo;extend&amp;raquo; cho phép mở rộng use case gốc với các chức năng bổ sung tùy theo điều kiện.&lt;/p&gt;
+&lt;h3 id=&#34;5-what-does-a-system-boundary-in-a-use-case-diagram-indicate&#34;&gt;5. What does a system boundary in a use case diagram indicate?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Answer: C. The scope of the system, identifying which use cases are part of the system&lt;/strong&gt;&lt;br&gt;
+System boundary xác định phạm vi của hệ thống và các use case nào thuộc về hệ thống.&lt;/p&gt;
+&lt;h3 id=&#34;6-what-is-the-main-difference-between-include-and-extend-relationships&#34;&gt;6. What is the main difference between &amp;laquo;include&amp;raquo; and &amp;laquo;extend&amp;raquo; relationships?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Answer: B. &amp;laquo;include&amp;raquo; represents mandatory inclusion, while &amp;laquo;extend&amp;raquo; represents optional extension&lt;/strong&gt;&lt;br&gt;
+&amp;laquo;include&amp;raquo; là bắt buộc phải thực hiện, trong khi &amp;laquo;extend&amp;raquo; là tùy chọn mở rộng.&lt;/p&gt;
+&lt;h3 id=&#34;7-which-of-the-following-is-true-about-an-actor-in-a-use-case-diagram&#34;&gt;7. Which of the following is true about an actor in a use case diagram?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Answer: B. It can represent a user, a system, or an external device interacting with the system&lt;/strong&gt;&lt;br&gt;
+Actor có thể là người dùng, hệ thống khác hoặc thiết bị bên ngoài tương tác với hệ thống.&lt;/p&gt;
+&lt;h3 id=&#34;8-which-of-the-following-best-describes-a-use-case&#34;&gt;8. Which of the following best describes a use case?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Answer: B. A specific function or interaction in a system that delivers a result to an actor&lt;/strong&gt;&lt;br&gt;
+Use case là một chức năng hoặc tương tác cụ thể trong hệ thống mang lại kết quả cho actor.&lt;/p&gt;
+&lt;h2 id=&#34;activity-diagram-questions&#34;&gt;Activity Diagram Questions&lt;/h2&gt;
+&lt;h3 id=&#34;9-what-is-the-primary-purpose-of-an-activity-diagram&#34;&gt;9. What is the primary purpose of an activity diagram?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Answer: B. To represent the dynamic flow of activities in a system&lt;/strong&gt;&lt;br&gt;
+Activity diagram thể hiện luồng hoạt động động trong hệ thống.&lt;/p&gt;
+&lt;h3 id=&#34;10-in-an-activity-diagram-what-does-an-activity-represent&#34;&gt;10. In an activity diagram, what does an activity represent?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Answer: C. A behavior that is executed within a system&lt;/strong&gt;&lt;br&gt;
+Activity thể hiện một hành vi được thực thi trong hệ thống.&lt;/p&gt;
+&lt;h3 id=&#34;11-what-does-the-decision-node-diamond-shape-represent&#34;&gt;11. What does the decision node (diamond shape) represent?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Answer: B. A branching point where the flow can take different paths based on a condition&lt;/strong&gt;&lt;br&gt;
+Node quyết định (hình thoi) thể hiện điểm rẽ nhánh dựa trên điều kiện.&lt;/p&gt;
+&lt;h3 id=&#34;12-what-symbol-is-used-to-denote-concurrency-in-activity-diagrams&#34;&gt;12. What symbol is used to denote concurrency in activity diagrams?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Answer: A. Fork and join nodes (thick horizontal or vertical bars)&lt;/strong&gt;&lt;br&gt;
+Fork và join nodes được sử dụng để thể hiện các hoạt động đồng thời.&lt;/p&gt;
+&lt;h3 id=&#34;13-what-is-the-purpose-of-a-fork-node-in-an-activity-diagram&#34;&gt;13. What is the purpose of a fork node in an activity diagram?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Answer: A. To split the flow into multiple concurrent paths&lt;/strong&gt;&lt;br&gt;
+Fork node chia luồng thành nhiều đường đi song song.&lt;/p&gt;
+&lt;h3 id=&#34;14-which-node-is-used-to-merge-concurrent-flows-back-into-a-single-flow&#34;&gt;14. Which node is used to merge concurrent flows back into a single flow?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Answer: C. Join node&lt;/strong&gt;&lt;br&gt;
+Join node được sử dụng để hợp nhất các luồng song song thành một luồng đơn.&lt;/p&gt;
+&lt;h3 id=&#34;15-what-does-a-rectangle-with-rounded-edges-represent&#34;&gt;15. What does a rectangle with rounded edges represent?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Answer: B. An action or activity&lt;/strong&gt;&lt;br&gt;
+Hình chữ nhật bo góc thể hiện một hành động hoặc hoạt động.&lt;/p&gt;
+&lt;h3 id=&#34;16-what-is-the-role-of-a-guard-condition&#34;&gt;16. What is the role of a guard condition?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Answer: B. To specify the conditions under which a flow proceeds&lt;/strong&gt;&lt;br&gt;
+Guard condition xác định điều kiện để luồng tiếp tục.&lt;/p&gt;
+&lt;h3 id=&#34;17-what-does-a-swimlane-indicate&#34;&gt;17. What does a swimlane indicate?&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Answer: B. The allocation of responsibilities to different actors or objects&lt;/strong&gt;&lt;br&gt;
+Swimlane phân chia trách nhiệm cho các actor hoặc đối tượng khác nhau.&lt;/p&gt;
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.uml-diagrams.org/use-case-diagrams.html&#34;&gt;UML Use Case Diagrams&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.uml-diagrams.org/activity-diagrams.html&#34;&gt;UML Activity Diagrams&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    </item>
+    
+  </channel>
+</rss>
