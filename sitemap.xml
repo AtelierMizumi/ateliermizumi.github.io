@@ -2,28 +2,61 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://blog.thuanc177.me/tags/diagram/</loc>
+    <lastmod>2024-12-02T02:21:17+07:00</lastmod>
+  </url><url>
+    <loc>https://blog.thuanc177.me/posts/</loc>
+    <lastmod>2024-12-02T02:21:17+07:00</lastmod>
+  </url><url>
+    <loc>https://blog.thuanc177.me/posts/system-analyst-test-3/</loc>
+    <lastmod>2024-12-02T02:21:17+07:00</lastmod>
+  </url><url>
+    <loc>https://blog.thuanc177.me/tags/system-analyst/</loc>
+    <lastmod>2024-12-02T02:21:17+07:00</lastmod>
+  </url><url>
+    <loc>https://blog.thuanc177.me/tags/</loc>
+    <lastmod>2024-12-02T02:21:17+07:00</lastmod>
+  </url><url>
+    <loc>https://blog.thuanc177.me/</loc>
+    <lastmod>2024-12-02T02:21:17+07:00</lastmod>
+  </url><url>
+    <loc>https://blog.thuanc177.me/tags/uml/</loc>
+    <lastmod>2024-12-02T02:21:17+07:00</lastmod>
+  </url><url>
+    <loc>https://blog.thuanc177.me/posts/system-analyst-test-1/</loc>
+    <lastmod>2024-12-02T02:05:24+07:00</lastmod>
+  </url><url>
+    <loc>https://blog.thuanc177.me/tags/test/</loc>
+    <lastmod>2024-12-02T02:05:24+07:00</lastmod>
+  </url><url>
+    <loc>https://blog.thuanc177.me/posts/jotion/</loc>
+    <lastmod>2024-12-02T01:40:21+07:00</lastmod>
+  </url><url>
+    <loc>https://blog.thuanc177.me/tags/notion-clone/</loc>
+    <lastmod>2024-12-02T01:40:21+07:00</lastmod>
+  </url><url>
+    <loc>https://blog.thuanc177.me/tags/project/</loc>
+    <lastmod>2024-12-02T01:40:21+07:00</lastmod>
+  </url><url>
+    <loc>https://blog.thuanc177.me/tags/webapp/</loc>
+    <lastmod>2024-12-02T01:40:21+07:00</lastmod>
+  </url><url>
+    <loc>https://blog.thuanc177.me/tags/about/</loc>
+    <lastmod>2024-12-02T01:24:40+07:00</lastmod>
+  </url><url>
+    <loc>https://blog.thuanc177.me/about/</loc>
+    <lastmod>2024-12-02T01:24:40+07:00</lastmod>
+  </url><url>
+    <loc>https://blog.thuanc177.me/tags/personal/</loc>
+    <lastmod>2024-12-02T01:24:40+07:00</lastmod>
+  </url><url>
     <loc>https://blog.thuanc177.me/layouts/partials/comments/</loc>
     <lastmod>2024-12-01T14:52:47+07:00</lastmod>
   </url><url>
     <loc>https://blog.thuanc177.me/layouts/</loc>
     <lastmod>2024-12-01T14:52:47+07:00</lastmod>
   </url><url>
-    <loc>https://blog.thuanc177.me/</loc>
-    <lastmod>2024-12-01T14:52:47+07:00</lastmod>
-  </url><url>
-    <loc>https://blog.thuanc177.me/tags/hello/</loc>
-    <lastmod>2024-12-01T14:39:39+07:00</lastmod>
-  </url><url>
     <loc>https://blog.thuanc177.me/posts/helloworld/</loc>
-    <lastmod>2024-12-01T14:39:39+07:00</lastmod>
-  </url><url>
-    <loc>https://blog.thuanc177.me/posts/</loc>
-    <lastmod>2024-12-01T14:39:39+07:00</lastmod>
-  </url><url>
-    <loc>https://blog.thuanc177.me/tags/</loc>
-    <lastmod>2024-12-01T14:39:39+07:00</lastmod>
-  </url><url>
-    <loc>https://blog.thuanc177.me/tags/world/</loc>
     <lastmod>2024-12-01T14:39:39+07:00</lastmod>
   </url><url>
     <loc>https://blog.thuanc177.me/categories/</loc>
