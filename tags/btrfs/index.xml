@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Btrfs on thuanc177</title>
+    <link>https://blog.thuanc177.me/tags/btrfs/</link>
+    <description>Recent content in Btrfs on thuanc177</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 02 Dec 2024 16:13:11 +0700</lastBuildDate><atom:link href="https://blog.thuanc177.me/tags/btrfs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Btrfs Snapshot: A Guide to System Rollbacks on Arch Linux</title>
+      <link>https://blog.thuanc177.me/posts/btrfs-snapshot-boot/</link>
+      <pubDate>Mon, 02 Dec 2024 16:13:11 +0700</pubDate>
+      
+      <guid>https://blog.thuanc177.me/posts/btrfs-snapshot-boot/</guid>
+      <description>&lt;h1 id=&#34;btrfs-snapshots-and-system-rollbacks-on-arch-linux&#34;&gt;BTRFS snapshots and system rollbacks on Arch Linux&lt;/h1&gt;
+&lt;p&gt;Set up automatic snapshots of a BTRFS root subvolume (supposed you&amp;rsquo;ve installed your system using btrfs), add these snapshots to the GRUB boot menu, and gain the ability to rollback an &lt;a href=&#34;https://www.dwarmstrong.org/tags/arch/&#34;&gt;Arch Linux&lt;/a&gt; system to an earlier state.&lt;/p&gt;
+&lt;h1 id=&#34;lets-go&#34;&gt;Let&amp;rsquo;s go&lt;/h1&gt;
+&lt;h2 id=&#34;1-install-btrfs-assistant&#34;&gt;1. Install btrfs assistant&lt;/h2&gt;
+&lt;p&gt;Open the terminal and install &lt;a href=&#34;https://github.com/nexusriot/btrfs-assistant&#34;&gt;btrfs-assistant&lt;/a&gt; from the AUR using your favorite AUR helper
+For this demo I&amp;rsquo;m gonna use &lt;a href=&#34;https://github.com/Jguer/yay&#34;&gt;yay (yet another yogurt)&lt;/a&gt;&lt;/p&gt;</description>
+      <content>&lt;h1 id=&#34;btrfs-snapshots-and-system-rollbacks-on-arch-linux&#34;&gt;BTRFS snapshots and system rollbacks on Arch Linux&lt;/h1&gt;
+&lt;p&gt;Set up automatic snapshots of a BTRFS root subvolume (supposed you&amp;rsquo;ve installed your system using btrfs), add these snapshots to the GRUB boot menu, and gain the ability to rollback an &lt;a href=&#34;https://www.dwarmstrong.org/tags/arch/&#34;&gt;Arch Linux&lt;/a&gt; system to an earlier state.&lt;/p&gt;
+&lt;h1 id=&#34;lets-go&#34;&gt;Let&amp;rsquo;s go&lt;/h1&gt;
+&lt;h2 id=&#34;1-install-btrfs-assistant&#34;&gt;1. Install btrfs assistant&lt;/h2&gt;
+&lt;p&gt;Open the terminal and install &lt;a href=&#34;https://github.com/nexusriot/btrfs-assistant&#34;&gt;btrfs-assistant&lt;/a&gt; from the AUR using your favorite AUR helper
+For this demo I&amp;rsquo;m gonna use &lt;a href=&#34;https://github.com/Jguer/yay&#34;&gt;yay (yet another yogurt)&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;yay -S btrfs-assistant
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;2-enable-snapshot-in-btrfs-assitant&#34;&gt;2. Enable snapshot in btrfs assitant&lt;/h2&gt;
+&lt;p&gt;Open the btrfs-assitant, you can see there&amp;rsquo;s many features such as Scrub, Balance, &amp;hellip; but today we will focus on enabling automatic snapshot service&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://cdn.discordapp.com/attachments/538969606836977665/1313076221193748560/aAAheQ6.png?ex=674ed106&amp;is=674d7f86&amp;hm=70338f717e685547607481f19efb2af7bee8e62324dda8275849d5eaa8485cb7&amp;&#34;&gt;Btrfs Assistant Menu&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Head to the &lt;strong&gt;Snapper Setting&lt;/strong&gt; tab&lt;/li&gt;
+&lt;li&gt;Click on &lt;strong&gt;New config&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Select &lt;strong&gt;Backup path&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Select the sub directory you want to store in restoration&lt;/li&gt;
+&lt;li&gt;Note that if that sub volumn already covered by another backup config, it won&amp;rsquo;t work&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Set the Backup interval:
+&lt;ul&gt;
+&lt;li&gt;For example setting 3 on daily will be the same as make 1 backup every 8 hours&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Save&lt;/strong&gt; your configuration and &lt;strong&gt;Apply systemd changes&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;congrats-on-having-a-snapshot-service-now&#34;&gt;Congrats on having a snapshot service now&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3-install-grub-btrfs&#34;&gt;3. Install grub-btrfs&lt;/h2&gt;
+&lt;p&gt;Having snapshot service is a thing, what we want is to be able to boot from it&lt;/p&gt;
+&lt;h3 id=&#34;we-can-achieve-this-by-installing-grub-btrfs&#34;&gt;We can achieve this by installing grub-btrfs&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo pacman -S grub-btrfs
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Set the location of the directory containing the &lt;code&gt;grub.cfg&lt;/code&gt; file in &lt;code&gt;/etc/default/grub-btrfs/config&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Example: My &lt;code&gt;grub.cfg&lt;/code&gt; is located in &lt;code&gt;/efi/grub&lt;/code&gt; &amp;hellip;&lt;/p&gt;
+&lt;p&gt;At the next boot, there is an submenu in GRUB for &lt;code&gt;Arch Linux snapshots&lt;/code&gt;.&lt;/p&gt;
+</content>
+    </item>
+    
+  </channel>
+</rss>

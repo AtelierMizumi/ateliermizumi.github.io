@@ -2,22 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://blog.thuanc177.me/tags/diagram/</loc>
-    <lastmod>2024-12-02T02:21:17+07:00</lastmod>
+    <loc>https://blog.thuanc177.me/tags/arch-linux/</loc>
+    <lastmod>2024-12-02T16:13:11+07:00</lastmod>
+  </url><url>
+    <loc>https://blog.thuanc177.me/tags/btrfs/</loc>
+    <lastmod>2024-12-02T16:13:11+07:00</lastmod>
+  </url><url>
+    <loc>https://blog.thuanc177.me/posts/btrfs-snapshot-boot/</loc>
+    <lastmod>2024-12-02T16:13:11+07:00</lastmod>
   </url><url>
     <loc>https://blog.thuanc177.me/posts/</loc>
+    <lastmod>2024-12-02T16:13:11+07:00</lastmod>
+  </url><url>
+    <loc>https://blog.thuanc177.me/tags/snapshots/</loc>
+    <lastmod>2024-12-02T16:13:11+07:00</lastmod>
+  </url><url>
+    <loc>https://blog.thuanc177.me/tags/system-rollback/</loc>
+    <lastmod>2024-12-02T16:13:11+07:00</lastmod>
+  </url><url>
+    <loc>https://blog.thuanc177.me/tags/</loc>
+    <lastmod>2024-12-02T16:13:11+07:00</lastmod>
+  </url><url>
+    <loc>https://blog.thuanc177.me/</loc>
+    <lastmod>2024-12-02T16:13:11+07:00</lastmod>
+  </url><url>
+    <loc>https://blog.thuanc177.me/tags/diagram/</loc>
     <lastmod>2024-12-02T02:21:17+07:00</lastmod>
   </url><url>
     <loc>https://blog.thuanc177.me/posts/system-analyst-test-3/</loc>
     <lastmod>2024-12-02T02:21:17+07:00</lastmod>
   </url><url>
     <loc>https://blog.thuanc177.me/tags/system-analyst/</loc>
-    <lastmod>2024-12-02T02:21:17+07:00</lastmod>
-  </url><url>
-    <loc>https://blog.thuanc177.me/tags/</loc>
-    <lastmod>2024-12-02T02:21:17+07:00</lastmod>
-  </url><url>
-    <loc>https://blog.thuanc177.me/</loc>
     <lastmod>2024-12-02T02:21:17+07:00</lastmod>
   </url><url>
     <loc>https://blog.thuanc177.me/tags/uml/</loc>
