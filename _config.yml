@@ -123,7 +123,7 @@ comments:
   giscus:
     repo: AtelierMizumi/ateliermizumi.github.io # <gh-username>/<repo>
     repo_id: R_kgDONjkgGg
-    category: Announcements
+    category: Posts
     category_id: DIC_kwDONjkgGs4ClmDO
     mapping: pathname # optional, default to 'pathname'
     strict: 0 # optional, default to '0'
