@@ -8,7 +8,7 @@ tags: ['course', 'linux', 'open-source']
 
 # Linux and Open Source Software
 
-> All credits goes to [Van Dong Nguyen](hdtlu.github.io/2015-2016/linux.html)
+> All credits goes to [Van Dong Nguyen](https://hdtlu.github.io/2015-2016/linux.html)
 
 ## Objectives
 
