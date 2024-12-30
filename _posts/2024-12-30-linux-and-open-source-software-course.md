@@ -31,7 +31,7 @@ Equip students with understanding and knowledge about open source software and L
 
 1. [Lecture 1: Introduction](/assets/download/linux/Linux-OpenSource-1.pdf)
 2. [Lecture 2: Linux Overview](/assets/download/linux/Linux-OpenSource-2.pdf)
-3. [Lecture 3: Getting Started with Linux](/assets/dowwnload/linux/Linux-OpenSource-3.pdf)
+3. [Lecture 3: Getting Started with Linux](/assets/download/linux/Linux-OpenSource-3.pdf)
 4. [Lecture 4: Users, Permissions and File Management](/assets/download/linux/Linux-OpenSource-4.pdf)
 5. [Lecture 6: File Systems, Files and I/O Redirection](/assets/download/linux/Linux-OpenSource-6.pdf)
 6. [Lecture 8: Processes and Scheduling](/assets/download/linux/Linux-OpenSource-8.pdf)
