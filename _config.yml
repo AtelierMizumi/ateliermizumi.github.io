@@ -42,7 +42,7 @@ social:
     - https://github.com/AtelierMizumi # change to your GitHub homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
-    # - https://www.linkedin.com/in/username
+    - https://www.linkedin.com/in/thuan-tran-700585340/
 
 # Site Verification Settings
 webmaster_verifications:
@@ -122,12 +122,12 @@ comments:
   # Giscus options › https://giscus.app
   giscus:
     repo: AtelierMizumi/ateliermizumi.github.io # <gh-username>/<repo>
-    repo_id: 
-    category:
-    category_id:
-    mapping: # optional, default to 'pathname'
-    strict: # optional, default to '0'
-    input_position: # optional, default to 'bottom'
+    repo_id: R_kgDONjkgGg
+    category: Announcements
+    category_id: DIC_kwDONjkgGs4ClmDO
+    mapping: pathname # optional, default to 'pathname'
+    strict: 0 # optional, default to '0'
+    input_position: top # optional, default to 'bottom'
     lang: # optional, default to the value of `site.lang`
     reactions_enabled: # optional, default to the value of `1`
 

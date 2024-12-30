@@ -8,6 +8,7 @@ tags: ['course', 'linux', 'open-source']
 
 # Linux and Open Source Software
 
+> This course is in Vietnamese
 > All credits goes to [Van Dong Nguyen](https://hdtlu.github.io/2015-2016/linux.html)
 
 ## Objectives
@@ -37,6 +38,8 @@ Equip students with understanding and knowledge about open source software and L
 6. [Lecture 8: Processes and Scheduling](/assets/download/linux/Linux-OpenSource-8.pdf)
 7. [Lecture 9: Package Management and X-Windows](/assets/download/linux/Linux-OpenSource-9.pdf)
 8. [Lecture 10: Services and Basic Linux Service Administration](/assets/download/linux/Linux-OpenSource-10.pdf)
+9. [Lecture 11: Installing Basic Internet Server Services on Linux](/assets/download/linux/Linux-OpenSource-11.pdf)
+10. [Lecture 12: Remote Administration with Control Panel](/assets/download/linux/Linux-OpenSource-12.pdf)
 
 ## Laboratory Exercises
 
