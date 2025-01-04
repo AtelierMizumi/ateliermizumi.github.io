@@ -1,65 +1,139 @@
 ---
 layout: post
-title: Comprehensive Android Development Course Notes
-date: 2025-01-03 13:12 +0700
-categories: ['lecture-note', 'mobile-development']
-tags: ['android', 'kotlin', 'mobile-development', 'programming']
+title: Simplified guide on taking snapshots on Btrfs with btrfs-assistant
+date: 2025-01-04 20:25 +0700
+categories: ['guide', 'linux']
+tags: ['btrfs', 'arch-linux', 'snapper', 'btrfs-assistant']
 ---
 
-# Android Development Course Overview
+# Simplified guide on taking snapshots on Btrfs with btrfs-assistant
 
-## Prerequisites
+Are you a Linux user who frequently modifies system configurations but worries about potential system failures? System snapshots offer a reliable safety net, allowing you to restore your system if something goes wrong.
 
-- Strong Java programming foundation
-- Basic Kotlin knowledge
-    - Modern syntax and features
-    - Object-oriented concepts
-    - Functional programming paradigms
-- Development Environment:
-    - [Android Studio](https://developer.android.com/studio/)
-    - Android Emulator (via [KVM/QEMU](https://computingforgeeks.com/install-kvm-qemu-virt-manager-arch-manjar/) for Linux)
-- Willingness to learn and adapt
+While Snapper is a powerful tool for managing Btrfs snapshots, it requires configuration file editing that some users find challenging. This guide introduces btrfs-assistant, a user-friendly graphical tool that simplifies the snapshot management process on Btrfs filesystems.
 
-## Course Evaluation
+## Installation
 
-| Component | Weight | Details |
-|-----------|---------|---------|
-| Attendance | 10% | Regular participation |
-| Labs/Homework | 20% | Weekly assignments |
-| Mid-term | 20% | Written test (No AI assistance) |
-| Final Project | 50% | Complete Android application |
+### Arch
 
-## Learning Resources
+Btrfs Assistant can be installed from the AUR as `btrfs-assistant`
 
-1. 📚 [Official Course Syllabus](/assets/download/android-dev/34.CNTT2022%20-%20LapTrinhDiDong.pdf)
-2. 🎓 [Google's Android Development Curriculum](https://developer.android.com/teach)
-3. 💻 [Android Basics with Compose](https://developer.android.com/courses/android-basics-compose/course)
-4. 📖 [Kotlin Fundamentals (English)](/assets/download/android-dev/BasicKotlin01.pdf)
-5. 📖 [Kotlin Fundamentals (Vietnamese)](/assets/download/android-dev/KotlinVN.pdf)
+### Debian
 
-## Course Highlights
+There are unofficial Debian packages [here](https://software.opensuse.org/download/package?package=btrfs-assistant&project=home:iDesmI:more) coutesy of [@idesmi](https://gitlab.com/idesmi) or you can follow the instructions for Ubuntu to build it yourself.
 
-### Key Concepts
+### Ubuntu
 
-- Thesis writing emphasis on precision
-- Kotlin's robust null-safety system
-- Type handling and exception management
-- Kotlin operator specifications
-- Object-oriented programming in Kotlin
+Install Snapper package using this command:
 
-### Weekly Assignments
+```bash
+sudo apt install snapper
+```
 
-- Control flow statements review
-- Quadratic equation solver
-- Seasonal abbreviation program
-- Factorial calculator
-- Advanced concepts preview:
-  - Functions
-  - Lambda expressions
-  - Callback implementations
+### Fedora
 
-### Upcoming Content
+Btrfs Assistant is available in the Fedora repos as `btrfs-assistant`
 
-- Hands-on programming exercises
-- Kotlin runtime environment setup
-- Comparative analysis: Kotlin vs. other languages
+## Btrfs Assistant
+
+![btrfs-assistant user interface](/assets/img/posts/btrfs-asistant/gui-preview.png)
+
+## Configure snapshot through btrfs-assistant
+
+Head over to Snapper setting tab (if you dont see it, install `snapper` package), enter config name, select **subvolume** to back up and choose needed systemd settings and press **Save**. Now  **Timely snapshot** interval settings will pop-up.
+I want to select the snapshot on boot with grub and clean old snapshots to save up space. This is my config to back up `/home` subvolume
+
+![Snapshot Setting](/assets/img/posts/btrfs-asistant/snapshot-setting.png)
+
+This setting will take one snapshot every day.
+
+Btrfs Assistant also allows you to take manual snapshot and manage your snapshots easier
+
+My Arch installation using `archinstall` script using Btrfs with LUKS encryption has created the `/.snapshots` directory already but I can't seems to add my own configuration on it so we need a little tweak to get it working us way
+
+Unmount the subvolume and remove the mountpoint ... (yes you can use `rm -rf` to remove subvolumes)
+
+```bash
+sudo umount /.snapshots
+sudo rm -rf /.snapshots
+```
+
+## Use grub-btrfs to boot from snapshots
+
+### Note
+
+>Snapper's snapshots are read-only, and there are some inherent difficulties booting into read-only snapshots. Many services, such as a desktop manager, require a writable /var directory, and will fail to start when booted from a read-only snapshot.
+>
+>To work around this, you can either make the snapshots writable, or use the developer-approved method of booting the snapshots with overlayfs, causing the snapshot to behave similar to a live CD environment. 
+
+## To boot snapshots with overlayfs
+
+- Ensure [grub-btrfs](https://archlinux.org/packages/?name=grub-btrfs) is installed on your system.
+- Add `grub-btrfs-overlayfs` to the end of the HOOKS array in `/etc/mkinitcpio.conf`. For example:
+
+```conf
+HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block filesystems fsck grub-btrfs-overlayfs)
+```
+
+- [Regerate the initramfs](https://wiki.archlinux.org/title/Regenerate_the_initramfs).
+
+```bash
+sudo mkinitcpio -P
+```
+
+- Set the location of the directory containing the `grub.cfg` file in `/etc/default/grub-btrfs/config`.
+
+Example: EndeavousOS's `grub.cfg` is located in `/efi/grub` and my Arch Linux's is in `/boot/grub`
+
+```conf
+GRUB_BTRFS_GRUB_DIRNAME="/boot/grub"
+```
+
+## Auto-update GRUB
+
+Enable `grub-btrfs.path` to auto-regenerate `grub-btrfs.cfg` whenever a modification appears in `/.snapshots` ...
+
+```bash
+sudo systemctl enable --now grub-btrfs.path
+```
+
+More info check out [grub-btrfs](https://github.com/Antynea/grub-btrfs)
+
+## System rollback the 'Arch Way'
+
+Snapper includes a rollback tool, but on Arch systems the preferred method is a manual rollback.
+
+After booting into a snapshot mounted **rw** courtesy of **overlayfs**, mount the toplevel subvolume (subvolid=5). That is, omit any subvolid or subvol mount flags (example: an encrypted device map labelled **cryptdev**) ...
+
+```bash
+sudo mount /dev/mapper/cryptdev /mnt
+```
+
+Move the broken `@` subvolume out of the way ...
+
+```bash
+sudo mv /mnt/@ /mnt/@.broken
+```
+Or simply delete the subvolume ...
+
+```bash
+sudo btrfs subvolume delete /mnt/@
+```
+Find the number of the snapshot that you want to recover ...
+
+```bash
+sudo grep -r '<date>' /mnt/@snapshots/*/info.xml
+[...]
+/.snapshots/8/info.xml:  <date>2022-08-20 15:21:53</date>
+/.snapshots/9/info.xml:  <date>2022-08-20 15:22:39</date>
+```
+Create a read-write snapshot of the read-only snapshot taken by Snapper ...
+
+```bash
+sudo btrfs subvolume snapshot /mnt/@snapshots/number/snapshot /mnt/@
+```
+Where **number** is the snapshot you wish to restore as the new **@**.
+
+Unmount **/mnt**.
+
+Reboot and rollback!
