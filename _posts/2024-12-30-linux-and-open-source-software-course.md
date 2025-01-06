@@ -6,8 +6,6 @@ categories: ['course', 'linux', 'open-source']
 tags: ['course', 'linux', 'open-source']
 ---
 
-# Linux and Open Source Software
-
 > This course is in Vietnamese
 > All credits goes to [Van Dong Nguyen](https://hdtlu.github.io/2015-2016/linux.html)
 
