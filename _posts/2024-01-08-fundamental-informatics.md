@@ -44,6 +44,6 @@ Trang bị cho học viên những hiểu biết cũng như kĩ năng về tin h
 4. [TH 4: Câu lệnh lặp](/assets/download/thdc/TH4_THDC.pdf)
 5. [TH 5: Viết hàm](/assets/download/thdc/TH5_THDC.pdf)
 6. [TH 6: Mảng](/assets/download/thdc/TH6_THDC.pdf)
-    - [Bài giải 1](/assets/download/thdc/TH6_THDC_BG1.pdf)
+    - [Bài giải 1](/assets/download/thdc/TH6_Bai1.cpp)
 7. [TH 7: Xâu](/assets/download/thdc/TH7_THDC.pdf)
 8. [TH 8: Kết hợp các cấu trúc lặp và điều kiện](/assets/download/thdc/TH8_THDC.pdf)
