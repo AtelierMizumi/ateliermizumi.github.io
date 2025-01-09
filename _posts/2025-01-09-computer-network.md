@@ -37,7 +37,7 @@ All slides in [English](/assets/download/computer-network/Computer-Network-EN.zi
 
 ## Practice Labs
 
-All practice labs in [Vietnamese]()
+All practice labs in [Vietnamese](/assets/download/computer-network/Computer-Network-Practice-Labs-VN.zip)
 
 1. [Practice 1: Tìm hiểu các lệnh cơ bản về mạng](/assets/download/computer-network/Practices/Lab%201%20Tim%20hieu%20cac%20lenh%20co%20ban%20ve%20mang.doc)
 2. [Practice 2: Thực hành bấm cáp mạng](/assets/download/computer-network/Practices/Lab%202%20Thuc%20hanh%20bam%20cap%20mang.doc)
