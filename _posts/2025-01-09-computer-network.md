@@ -6,6 +6,8 @@ categories: ['course', 'computer-network']
 tags: ['course', 'computer-network', 'vietnamese']
 ---
 
+
+
 [Syllabus](/assets/download/computer-network/VKU_De%20cuong%20chi%20tiet%20Mang%20may%20tinh_CLO_2022.12.23docx.docx)
 
 ## Slides
@@ -37,11 +39,12 @@ All slides in [English](/assets/download/computer-network/Computer-Network-EN.zi
 
 All practice labs in [Vietnamese]()
 
-1. [Practice 1: Introduction](/assets/download/linux/Linux-OpenSource-1.pdf)
-2. [Practice 2: Physical Layer](/assets/download/linux/Linux-OpenSource-2.pdf)
-3. [Practice 3: Data Link Layer](/assets/download/linux/Linux-OpenSource-3.pdf)
-4. [Practice 4: Medium Access Control (MAC) LAYER](/assets/download/linux/Linux-OpenSource-4.pdf)
-5. [Practice 5-1: The Network Layer: DATA PLANE](/assets/download/linux/Linux-OpenSource-6.pdf)
-6. [Practice 5-2: The Network Layer: CONTROL PLANE](/assets/download/linux/Linux-OpenSource-8.pdf)
-7. [Practice 6: The Transportation Layer](/assets/download/linux/Linux-OpenSource-9.pdf)
-8. [Practice 7: The Application Layer](/assets/download/linux/Linux-OpenSource-10.pdf)
+1. [Practice 1: Tìm hiểu các lệnh cơ bản về mạng](/assets/download/computer-network/Practices/Lab%201%20Tim%20hieu%20cac%20lenh%20co%20ban%20ve%20mang.doc)
+2. [Practice 2: Thực hành bấm cáp mạng](/assets/download/computer-network/Practices/Lab%202%20Thuc%20hanh%20bam%20cap%20mang.doc)
+3. [Practice 3: Thiết kế sơ đồ hệ thống](/assets/download/computer-network/Practices/Lab%203%20Thiet%20ke%20so%20do%20he%20thong%20mang.doc)
+4. [Practice 4: Phân hoạch địa chỉ IP](/assets/download/computer-network/Practices/Lab%204%20Phan%20hoach%20dia%20chi%20IP.doc)
+5. [Practice 5: Cấu hình định tuyến](/assets/download/computer-network/Practices/Lab%205%20Cau%20hinh%20dinh%20tuyen.doc)
+6. [Practice 6: Phân tích gói tin](/assets/download/computer-network/Practices/Lab%206%20Phan%20tich%20goi%20tin.doc)
+7. [Practice 7: Cấu hình dịch vụ DHCP, DNS, HTTP, E...](/assets/download/computer-network/Practices/Lab%207%20Cau%20hinh%20dich%20vu%20DHCP,%20DNS,%20HTTP,%20Email%20va%20FTP.doc)
+8. [Practice 8: Xây dựng hệ thống mạng LAN](/assets/download/computer-network/Practices/Lab%208%20Xay%20dung%20he%20thong%20mang%20LAN.doc)
+9. [Thực hành sử dụng WireShark](/assets/download/computer-network/Practices/WireShark.docx)
