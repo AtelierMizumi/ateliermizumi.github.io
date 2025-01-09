@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Computer Network
-date: 2025-01-09 7:30 +0700
+date: 2025-01-09 13:30 +0700
 categories: ['course', 'computer-network']
 tags: ['course', 'computer-network', 'vietnamese']
 ---
@@ -10,7 +10,7 @@ tags: ['course', 'computer-network', 'vietnamese']
 
 ## Slides
 
-All slides in [English](/assets/download/computer-network/ComputerNetwork-EN.zip) or in [Vietnamese](/assets/download/computer-network/ComputerNetwork-VN.zip)
+All slides in [English](/assets/download/computer-network/Computer-Network-EN.zip) or in [Vietnamese](/assets/download/computer-network/ComputerNetwork-VN.zip)
 
 ### English
 
@@ -25,13 +25,13 @@ All slides in [English](/assets/download/computer-network/ComputerNetwork-EN.zip
 
 ### Vietnamese
 
-1. [Bài 1: Giới thiệu](/assets/download/computer-network/Vietnamese-Slides/ComputerNetwork_C1_en.pptx)
-2. [Bài 2: Tầng vật lý](/assets/download/computer-network/Vietnamese-Slides/ComputerNetwork_C2_en.pptx)
-3. [Bài 3: Tầng liên kết dữ liệu](/assets/download/computer-network/Vietnamese-Slides/ComputerNetwork_C3_en.pptx)
-4. [Bài 4: Tầng điều khiển truy cập môi trường (MAC)](/assets/download/computer-network/Vietnamese-Slides/ComputerNetwork_C4_en%20Final.pptx)
-5. [Bài 5: Tầng mạng](/assets/download/computer-network/Vietnamese-Slides/ComputerNetwork_C5-1_en.pptx)
-6. [Bài 6: Tầng giao vận](/assets/download/computer-network/Vietnamese-Slides/ComputerNetwork_C6_en.pptx)
-7. [Bài 7: Tầng ứng dụng](/assets/download/computer-network/Vietnamese-Slides/ComputerNetwork_C7_en.pptx)
+1. [Bài 1: Giới thiệu](/assets/download/computer-network/Vietnamese-Slides/ComputerNetwork_C1.ppt)
+2. [Bài 2: Tầng vật lý](/assets/download/computer-network/Vietnamese-Slides/ComputerNetwork_C2.pptx)
+3. [Bài 3: Tầng liên kết dữ liệu](/assets/download/computer-network/Vietnamese-Slides/ComputerNetwork_C3.ppt)
+4. [Bài 4: Tầng điều khiển truy cập môi trường (MAC)](/assets/download/computer-network/Vietnamese-Slides/ComputerNetwork_C4.ppt)
+5. [Bài 5: Tầng mạng](/assets/download/computer-network/Vietnamese-Slides/ComputerNetwork_C5.pptx)
+6. [Bài 6: Tầng giao vận](/assets/download/computer-network/Vietnamese-Slides/ComputerNetwork_C6.ppt)
+7. [Bài 7: Tầng ứng dụng](/assets/download/computer-network/Vietnamese-Slides/ComputerNetwork_C7.ppt)
 
 ## Practice Labs
 
