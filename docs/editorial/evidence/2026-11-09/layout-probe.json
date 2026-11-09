@@ -1,0 +1,71 @@
+{
+  "article_probe": "passed",
+  "normal_geometry": {
+    "a": {
+      "x": 20,
+      "y": 20,
+      "w": 475,
+      "h": 560
+    },
+    "b": {
+      "x": 505,
+      "y": 20,
+      "w": 475,
+      "h": 275
+    },
+    "c": {
+      "x": 505,
+      "y": 305,
+      "w": 475,
+      "h": 275
+    }
+  },
+  "tiny_probe": {
+    "tiny": {
+      "a": {
+        "x": 20,
+        "y": 20,
+        "w": 1,
+        "h": 1
+      },
+      "b": {
+        "x": 31,
+        "y": 20,
+        "w": 1,
+        "h": 1
+      },
+      "c": {
+        "x": 42,
+        "y": 20,
+        "w": 1,
+        "h": 1
+      },
+      "d": {
+        "x": 53,
+        "y": 20,
+        "w": 1,
+        "h": 1
+      },
+      "e": {
+        "x": 64,
+        "y": 20,
+        "w": 1,
+        "h": 1
+      },
+      "f": {
+        "x": 75,
+        "y": 20,
+        "w": 1,
+        "h": 1
+      }
+    },
+    "outside": [
+      "d",
+      "e",
+      "f"
+    ]
+  },
+  "frontmatter_publication_guard": "present",
+  "btrfs_destructive_snippets": "absent",
+  "markdown_fences": "balanced"
+}

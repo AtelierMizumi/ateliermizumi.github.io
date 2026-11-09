@@ -2,35 +2,23 @@
 layout: post
 title: Install Anaconda and Jupyter Notebook on Arch Linux
 date: 2025-01-06 7:30 +0700
+last_modified_at: 2026-11-09
 categories: ['guide', 'linux']
 tags: ['conda', 'anaconda', 'data-analytics', 'jupyter-notebook']
 ---
 
-This guide will show you how to install Anaconda and Jupyter Notebook for Arch Linux System
+> **Documentation correction — November 9, 2026:** The original article conflated Conda with Anaconda Distribution and incorrectly described `jupyter build` as an initialization step. Those sections are corrected below. The remaining environment examples are historical; this update is not a fresh installation test on Arch Linux.
+{: .prompt-warning }
+
+Conda is a package and environment manager. Anaconda Distribution is a distribution that includes Conda; installing a package named after Conda is not by itself an installation of that distribution. See the [Conda documentation](https://docs.conda.io/projects/conda/en/stable/).
 
 ## 1.1 Installation
 
-Anaconda can be installed using these two ways
+Choose the distribution you intend to use, then follow its installation instructions. The [official Anaconda installation guide selector](https://www.anaconda.com/docs/getting-started/installation) provides separate guides for Anaconda Distribution and Miniconda.
 
-### Using AUR
+Check the installer architecture and the publisher's verification instructions before running it. Do not choose an installer solely from browser detection.
 
-Use your favorite AUR package manager and install `python-conda` package. This example I will use `yay
-```bash
-yay -S python-conda
-```
-
-### Using the official install script
-
-Download from Anaconda's official [download page](https://www.anaconda.com/download/success)
-
-The website will automatically hands you the right version from your browser's information
-
-Make the script executable and run the script
-
-```bash
-chmod u+x ./<install-script>
-./<install-script>
-```
+The earlier AUR `python-conda` command has been withdrawn from this article: its current availability and package contents have not been checked here, and it should not have been presented as equivalent to Anaconda Distribution.
 
 ## 2.1 Usage
 
@@ -70,7 +58,7 @@ To crate a new environment without default packages, run:
 conda create --no-default-packages --name myenv
 ```
 
-To create a environment with specified python version and packages, run: 
+The following is the original version-pinning example, not a recommendation for a new environment. Choose supported versions compatible with your project; this exact combination has not been re-solved in this revision.
 
 ```bash
 conda create --name myenv python=3.9 numpy=1.23.5 astropy
@@ -82,14 +70,22 @@ To activate the environment:
 conda activate myenv
 ```
 
-## 3.1 Install Jupyter Notebook
+## 3.1 Install and start JupyterLab
 
-Activate your desired enviroment through `conda`, then run the install command:
+For a dedicated JupyterLab environment, the following example uses `conda-forge`, the channel [recommended by Project Jupyter](https://jupyter.org/install) for Conda installations. Review the package transaction before confirming; this example has not been executed in a fresh Conda installation during this revision.
 
 ```bash
-conda install jupyter
+conda create --name blog-jupyter --override-channels -c conda-forge python jupyterlab
+conda activate blog-jupyter
+jupyter lab
 ```
 
-After that you can run the `jupyter build` to init your jupyter notebook enviroment in your current folder of the terminal. Then you can run `jupyter lab` or `jupyter notebook`.
+Open the URL printed by the server. There is no notebook-directory initialization step in this workflow. `jupyter lab build` belongs to a [JupyterLab rebuild workflow](https://jupyterlab.readthedocs.io/en/stable/user/extensions.html), not to creating your first notebook.
+
+For the separate Notebook application, follow [Project Jupyter's installation instructions](https://jupyter.org/install) and launch it with `jupyter notebook`. JupyterLab and Notebook should not be treated as interchangeable package names.
 
 ![Jupyter Interface](/assets/img/posts/jupyter/jupyter-greet-interface.png)
+
+## Revision note
+
+November 9, 2026: distinguished Conda from Anaconda Distribution, withdrew the unverified AUR installation path, marked the old version pins as historical, and replaced the incorrect initialization step with the documented server-launch workflow. No Conda environment was created during this correction.

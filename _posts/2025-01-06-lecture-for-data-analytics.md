@@ -1,7 +1,8 @@
 ---
 layout: post
-title: Lectture Note for Data Analytics 1
+title: Lecture Note for Data Analytics 1
 date: 2025-01-06 7:30 +0700
+last_modified_at: 2026-11-09
 categories: ['lecture-note', 'data-analytics']
 tags: ['conda', 'anaconda', 'data-analytics', 'jupyter-notebook']
 ---
@@ -41,10 +42,14 @@ Run your jupyter lab book using in your terminal.
 jupyter lab
 ```
 
-This will open a new tab in the using your browser at https://localhost:8888
+Open the URL printed by the Jupyter server. A default local setup normally uses HTTP rather than HTTPS; its port and authentication details may differ. See the [official Jupyter launch instructions](https://jupyter.org/install).
 
 You can start creating new block, this block can be a markdown block to write text, code block to run code,...
 
 Start by writing some **Python** code in your new code block
 
 You can export your note book as `HTML`
+
+## Revision note
+
+November 9, 2026: corrected the title typo and removed the fixed HTTPS localhost address. This remains a short historical course note, not a tested data-analysis lab.

@@ -13,7 +13,7 @@ date: 2024-01-02 10:00:00 +0700
 
 - 👋 Hi, I'm @AtelierMizumi (thuanc177)
 - 👀 Currently a second year student at VKU - Vietnam - Korea University of Information and Communication Technology
-- 📫 Email: [thuan.tran@thuanc177.me](mailto:thuan.tran@thuanc177.me)
+- 📫 Email: [me@minhthuan.dev](mailto:me@minhthuan.dev)
 - 🎮 I enjoy playing relaxing games, gacha games, and [osu!](https://osu.ppy.sh/u/thuanc177)
 
 ## GitHub Activity
