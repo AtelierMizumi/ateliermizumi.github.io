@@ -60,6 +60,8 @@ Kiểm chứng này cho thấy:
 
 Nó không chứng minh bất kỳ tốc độ nào hay tuổi của catalog thật.
 
+> **Giới hạn:** kiểm chứng fixture này được chạy trước; kết quả của ngày 2026-11-09 là dạng sandbox đơn lẻ, không infer được từ runtime database trống có thể có trong lần chạy này.
+
 ## Kết luận hẹp
 
 Cache SQLite của tool này trả lời được một câu hỏi cụ thể: khi không có mạng, app vẫn có thể truy vấn metadata đã lưu. Nhưng “có thể truy vấn” và “dữ liệu vẫn tươi” là hai thứ khác nhau. Bài này không đưa TTL hay tốc độ sub-second vào làm lời hứa, vì implementation không chứa các tuyên bố đó.
