@@ -1,0 +1,18 @@
+{
+  "article_id": 1,
+  "source_revision": "de1ea53ff5848c8c7fa720ce4f1753a7af23baa7",
+  "fixture_root": "scratch/check-plasma-fixture",
+  "watched_change": {
+    "file": "kdeglobals",
+    "snapshot_value": "before",
+    "compare_exit_code": 1,
+    "output": "CHANGED: kdeglobals"
+  },
+  "outside_fixture": {
+    "file": "outside.txt",
+    "before": "outside fixture v1",
+    "after": "outside fixture v2",
+    "reported_by_compare": false
+  },
+  "interpretation": "The comparator reports only the watched file; the unwatched file is outside the contract and is not treated as proof that the whole host is unchanged."
+}
