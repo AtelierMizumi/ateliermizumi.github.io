@@ -48,6 +48,17 @@ Hệ thống hiện muốn chuyển viết ngày trên 5 bài còn lại thành 
 | T4 | Đọc lại remote Pages: xác nhận cả 6 bài đều có mặt | Số bài mới có trong output production |
 | T5 | (no-op) Tidak ada commit mới bên ngoài scope đợt 1 | — |
 
+## Kết quả thực thi (2026-11-10, run bootstrap T1–T4)
+
+| Task | Trạng thái | Bằng chứng |
+|---|---|---|
+| T1 | **DONE** — Đổi 7 bài (plan ghi “6 bài” nhưng bảng có 7 bài #16,#1,#2,#15,#13,#5,#32): `2026-11-09-*` → `2026-11-10`..`2026-11-16`, `date:` khớp filename, `verified_on`/`source_revision` giữ `2026-11-09`, slug giữ nguyên nên URL `/posts/:title/` không đổi. | `git show dc125d6 --stat`, `git diff --check` clean |
+| T2 | **DONE (local Docker + CI Actions)** — `ruby:3.3-slim`: baseline 15 entries, 244 links, 89 files pass; sau rename không có `future:true` thì default (như GitHub Actions) skip 6 bài future (chỉ còn 8 post dirs + index, 176 links, 52 files) — đã ghi nhận. Sau khi thêm `future:true` vào `_config.yml`: production 15 entries (14 post dirs + index, đủ 7 bài mới), HTML-Proofer pass 243 links, 89 files (CI Actions `42666317324` cũng 243/89 pass, `done in 1.259s`, không còn `Skipping: future date`). | build log local + Actions log `42666317324` |
+| T3 | **DONE** — Commit `dc125d661b61991f1a931c83892aabac3b9d6c6b` `docs: reassign publication dates chronologically` (8 files: 7 posts + `_config.yml`), `git push origin master` thành công, `git branch -vv` → `master dc125d6 [origin/master]`, `git ls-remote origin master` = `dc125d6`. | `git push origin master`, `gh run view 42666317324` build+deploy ✓ |
+| T4 | **BLOCKED (live HTTPS)** — Remote branch đã xác nhận `origin/master = dc125d6`; Actions artifact đúng (HTML-Proofer 243/89, upload log liệt kê đủ `/posts/<slug>/index.html` cho 7 bài). Nhưng HTTPS live `https://blog.minhthuan.dev/` hiện trả 404 cho mọi post (cả bài cũ `btrfs-*` cũng 404) và `/` trả raw 34-byte `layout: home` (tức `.nojekyll` + Pages source legacy branch, không phục vụ Actions artifact — `build_type: legacy`). Đây là config deploy có sẵn từ 2021, không do commit này gây ra (`index.html` không đổi). Không claim live verified. Việc tiếp theo cần tác giả đặt Pages source → GitHub Actions rồi kiểm tra lại HTTPS. | `gh api .../pages` (`build_type: legacy`), `curl https://blog.minhthuan.dev/` (200 raw 34B), `curl /posts/.../` (404) |
+
+**Next item:** Không xuất bản backlog article trong run này (theo Run Context: dừng sau date-reassignment). Backlog kế tiếp theo cadence là #22 (offline IndexedDB, `STATIC_SUPPORTED, NEEDS_EXPERIMENT`) — phải thí nghiệm trước khi đăng, không fabricate verification. Nếu #22 chưa đủ điều kiện, ghi HOLD và sang #18/#21 theo thứ tự cadence.
+
 Các log nội bộ nằm ở `docs/editorial/evidence/2026-11-09/` giữ nguyên. Các change chưa có stamp thời gian khác sẽ được ghi lại ở commit riêng.
 
 ## Batch B còn lại — đề xuất cadence
