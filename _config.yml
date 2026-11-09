@@ -11,6 +11,11 @@ lang: en
 # Change to your timezone › https://kevinnovak.github.io/Time-Zone-Picker
 timezone: Asia/Ho_Chi_Minh
 
+# Keep chronologically reassigned posts visible even with future display dates.
+# Without this, Jekyll's default (future: false) would skip the six posts dated
+# after 2026-11-10 in production and on GitHub Pages, unpublishing them.
+future: true
+
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 

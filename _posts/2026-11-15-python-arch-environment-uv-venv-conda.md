@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Python trên Arch: chọn môi trường trước khi chọn uv, venv hay Conda"
-date: 2026-11-09
+date: 2026-11-15
 categories: ['guide', 'linux', 'python']
 tags: ['python', 'arch-linux', 'uv', 'venv', 'conda', 'environment']
 description: "So sánh uv project environment, venv và Conda theo ngôn ngữ của official docs, không lẫn Conda với Anaconda Distribution."

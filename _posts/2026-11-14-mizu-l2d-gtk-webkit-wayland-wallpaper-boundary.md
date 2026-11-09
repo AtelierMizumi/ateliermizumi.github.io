@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "mizu-l2d: GTK, WebKit và ranh giới của một wallpaper Wayland"
-date: 2026-11-09
+date: 2026-11-14
 categories: ['build-log', 'linux', 'case-study']
 tags: ['mizu-l2d', 'gtk', 'webkit', 'wayland', 'wallpaper', 'python']
 description: "Đọc cách mizu-l2d tách host GTK/WebKit, renderer và engine của wallpaper Wayland, cùng với giới hạn của từng hướng triển khai."

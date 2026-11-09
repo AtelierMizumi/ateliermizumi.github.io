@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "riceboot: desktop mô phỏng, filesystem của browser và một guest Linux là ba chuyện khác nhau"
-date: 2026-11-09
+date: 2026-11-13
 categories: ['build-log', 'frontend', 'case-study']
 tags: ['riceboot', 'browser', 'linux', 'v86', 'filesystem', 'architecture']
 description: "Đọc cách riceboot ghép simulator, VFS trong browser và guest Linux bằng v86 để phân biệt chúng lần lượt là bề mặt phản hồi, bề mặt lưu trữ và phần thực thi bản chất."

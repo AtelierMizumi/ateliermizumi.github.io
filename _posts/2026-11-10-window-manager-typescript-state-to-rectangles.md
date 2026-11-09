@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Window manager bằng TypeScript: từ state tới những hình chữ nhật"
-date: 2026-11-09
+date: 2026-11-10
 categories: ['build-log', 'frontend']
 tags: ['typescript', 'window-manager', 'riceboot', 'testing']
 description: "Đọc lõi layout của riceboot, theo một ví dụ ba cửa sổ và kiểm tra một giới hạn mà bộ test xanh chưa bắt được."

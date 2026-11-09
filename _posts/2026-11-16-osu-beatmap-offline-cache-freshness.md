@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Tìm beatmap khi mất mạng: cache SQLite đổi tốc độ lấy độ tươi thế nào?"
-date: 2026-11-09
+date: 2026-11-16
 categories: ['tool', 'python', 'case-study']
 tags: ['sqlite', 'offline', 'osu', 'cache', 'python']
 description: "Cache beatmap của osu-farm-downloader lưu metadata khi online để tìm kiếm không cần mạng; cùng lúc nó cũng lưu độ tươi và giá trị mặc định cần được chú thích."

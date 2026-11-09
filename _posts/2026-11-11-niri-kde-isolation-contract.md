@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Niri và KDE sống cùng máy: kiểm tra một hợp đồng isolation có giới hạn"
-date: 2026-11-09
+date: 2026-11-11
 categories: ['linux', 'desktop', 'engineering-case-study']
 tags: ['niri', 'kde-plasma', 'dotfiles', 'isolation', 'testing', 'linux']
 description: "Từ lời hứa giữ nguyên desktop còn lại, biến thành một tập file và key có hash, compare được."

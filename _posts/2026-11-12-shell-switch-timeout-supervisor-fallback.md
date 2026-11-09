@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Một nút đổi shell phải biết tự quay lại: timeout, supervisor và fallback"
-date: 2026-11-09
+date: 2026-11-12
 categories: ['linux', 'desktop', 'engineering-case-study']
 tags: ['niri', 'quickshell', 'shell', 'fallback', 'timeout', 'testing']
 description: "Đọc state machine chuyển shell trong dotfiles: xác nhận, timeout, thứ tự dừng supervisor và đường quay lại."
