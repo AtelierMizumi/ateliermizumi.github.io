@@ -1,180 +1,146 @@
 ---
 layout: post
-title: "Window manager bằng TypeScript: từ state tới những hình chữ nhật"
+title: "Window manager bằng TypeScript: khi ba cửa sổ thành sáu cái không nằm trong vùng dùng"
 date: 2026-11-10
 categories: ['build-log', 'frontend']
 tags: ['typescript', 'window-manager', 'riceboot', 'testing']
-description: "Đọc lõi layout của riceboot, theo một ví dụ ba cửa sổ và kiểm tra một giới hạn mà bộ test xanh chưa bắt được."
+description: "Tại commit be164eebab91ed53ef0a0ccfb0489bbc42677e73, hàm `dwindle` chia tiling theo hai nhánh; probe thuần túy cho ra 6 ô, trong đó 3 tràn ra ngoài `area`. Bài giới thiệu cách đọc kết quả — không phải tutorial cài đặt."
 lang: vi-VN
 comments: false
 toc: true
 source_revision: be164eebab91ed53ef0a0ccfb0489bbc42677e73
 verified_on: 2026-11-09
-editorial_status: published
+editorial_status: draft-review
 ---
 
-Để xếp ba cửa sổ cạnh nhau trong một desktop chạy trên browser, phần lõi chưa cần biết terminal đang hiển thị gì. Nó cần danh sách cửa sổ, vùng có thể sử dụng và khoảng cách giữa các cửa sổ. Kết quả là một bảng tọa độ.
+## Ba cửa nhỏ nhất mà bộ test vẫn pass
 
-Bài này đọc phần đó trong **riceboot**, tại commit `be164eebab91ed53ef0a0ccfb0489bbc42677e73`. Phạm vi là window state và layout của desktop mô phỏng. Nó không mô tả một Wayland compositor thật, cũng không hướng dẫn chạy Hyprland trong browser.
+Đừng bắt đầu bằng danh sách phạm vi. Bắt đầu bằng thứ gì đó nghiệm đúng, ngược lại lại.
 
-> **Phạm vi kiểm chứng, ngày 09/11/2026:** bộ Vitest của revision trên đã chạy với 33 file test và 182 test đều pass. Ví dụ tọa độ và trường hợp vùng quá nhỏ bên dưới được gọi trực tiếp từ hàm `dwindle`. Chưa chạy Playwright/E2E hoặc kiểm tra thao tác chuột bằng browser trong lượt kiểm chứng này. Bài đang ở trạng thái draft để tác giả duyệt.
-{: .prompt-info }
+Tại commit `be164eebab91ed53ef0a0ccfb0489bbc42677e73` của **riceboot**, hàm chia phần phủ (`dwindle`) nhận `ids`, `area` và `gaps`, trả về `Record<string, Rect>`. Bệ test layout có một case: 6 cửa sổ nằm trong một vùng dọc rộng `50`, cao `40`, outer gap `20`, inner gap `10`. Trước khi đọc kết quả, hỏi một câu:
 
-## Bắt đầu từ dữ liệu, chưa cần animation
+> Bộ test này bảo vệ điều gì thực sự — "không tràn" hay "kích thước không âm"?
 
-Trong [source layout](https://github.com/AtelierMizumi/riceboot/blob/be164eebab91ed53ef0a0ccfb0489bbc42677e73/src/compositor/layout/dwindle.ts), một hình chữ nhật có bốn trường:
+Dùng cùng assertion hiện có, kết quả của hàm là:
 
-```typescript
-interface Rect {
-  x: number
-  y: number
-  w: number
-  h: number
-}
-```
+| ID | x | y | w | h |
+|---|---|---|---|---|
+| a | 20 | 20 | 1 | 1 |
+| b | 31 | 20 | 1 | 1 |
+| c | 42 | 20 | 1 | 1 |
+| d | 53 | 20 | 1 | 1 |
+| e | 64 | 20 | 1 | 1 |
+| f | 75 | 20 | 1 | 1 |
 
-`x`, `y` chỉ góc trên bên trái; `w`, `h` là kích thước. Cửa sổ được nhận diện bằng ID riêng. Nhờ vậy, đổi vị trí không cần đổi danh tính cửa sổ, và đổi tiêu đề không cần xây lại mô hình layout.
+`d`, `e`, `f` nằm ở `x ≥ 50` — bên phải của vùng dùng. Bộ test vẫn pass vì assertion chỉ kiểm tra kích thước không âm, khác 0 — không kiểm tra sự kiện nằm trong `area`.
 
-Hàm được dùng để tính tiling nhận ba đầu vào:
+> **Hiện trạng kiểm chứng, 09/11/2026:** Vitest chạy 33 file test, 182 test pass (jsdom). Không có Playwright/E2E trong lượt này.
 
-- `ids`: thứ tự các cửa sổ cần xếp.
-- `area`: vùng được phép dùng, không nhất thiết là toàn bộ viewport.
-- `gaps`: khoảng cách bên ngoài (`outer`) và giữa các ô (`inner`).
+## Lệnh chạy thật, và bảng tọa độ nó trả về
 
-Đầu ra là `Record<string, Rect>`, tức mỗi ID ứng với một hình chữ nhật. Hàm không cần DOM, kích thước font hay nội dung app. Với cùng đầu vào, có thể so trực tiếp bảng tọa độ trả về trong test.
-
-## Đi qua ví dụ ba cửa sổ
-
-Dùng đúng fixture của [bộ test layout](https://github.com/AtelierMizumi/riceboot/blob/be164eebab91ed53ef0a0ccfb0489bbc42677e73/src/compositor/layout/dwindle.test.ts):
-
-```javascript
-const area = { x: 0, y: 0, w: 1000, h: 600 }
-const gaps = { inner: 10, outer: 20 }
-const ids = ['a', 'b', 'c']
-```
-
-Sau khi chừa outer gaps, ô ban đầu có góc `(20, 20)` và kích thước `960 × 560`. Khi còn nhiều cửa sổ, implementation chia vùng đang xét thành hai phần. Vùng rộng hơn cao thì chia trái/phải; vùng cao hơn rộng thì chia trên/dưới.
-
-Cửa sổ hiện tại nhận phần đầu. Vòng lặp tiếp tục với phần còn lại. Với fixture này, kết quả chạy hàm là:
-
-| Cửa sổ | x | y | w | h |
-|---|---:|---:|---:|---:|
-| `a` | 20 | 20 | 475 | 560 |
-| `b` | 505 | 20 | 475 | 275 |
-| `c` | 505 | 305 | 475 | 275 |
-
-Có thể đọc quan hệ giữa các ô như sau; sơ đồ này không theo tỉ lệ:
-
-```text
-+------------------+------------------+
-|                  |        b         |
-|        a         +------------------+
-|                  |        c         |
-+------------------+------------------+
-```
-
-Điểm dễ bỏ qua là **phần còn lại** quyết định nhánh chia tiếp theo. Implementation này không nhận ID của cửa sổ đang focus để chọn ô cần tách. Vì vậy, đây là một layout giản lược cần đọc theo code của nó, không phải lời hứa khớp toàn bộ hành vi của một window manager khác.
-
-Một chi tiết nhỏ khác nằm ở phép làm tròn: kích thước phần đầu dùng `Math.floor`, phần sau lấy phần còn lại. Khi phép chia không đều, hai ô không nhất thiết bằng nhau tuyệt đối. Test nên so với quy tắc đó thay vì giả định mọi lần split đều đối xứng.
-
-## Focus, workspace và geometry là những state khác nhau
-
-[Store của riceboot](https://github.com/AtelierMizumi/riceboot/blob/be164eebab91ed53ef0a0ccfb0489bbc42677e73/src/compositor/store.ts) giữ riêng:
-
-| State | Trách nhiệm |
-|---|---|
-| `windows` | Thông tin và mode của từng cửa sổ |
-| `order` | Thứ tự tiling theo workspace |
-| `active` | Workspace đang được chọn |
-| `focused` | ID đang nhận focus |
-| `area`, `gaps` | Đầu vào hình học |
-
-Khi mở cửa sổ, store thêm ID vào thứ tự của workspace hiện tại và focus cửa sổ mới. Khi gọi `focus(id)`, đường xử lý đó chỉ cập nhật `focused`; nó không tự đổi `order`. Đây là khác biệt giữa chọn một cửa sổ và sắp xếp lại cửa sổ.
-
-Đường tính `layout()` trước hết gọi `dwindle` cho thứ tự của workspace đang active. Sau đó, floating window đi qua nhánh tính/clamp hình riêng, còn fullscreen window nhận `area`. Các mode này không cùng một chính sách hình học.
-
-Cách tách đó cho phép test từng thao tác: đóng cửa sổ đang focus thì chọn ai tiếp theo; chuyển workspace có để lẫn cửa sổ không; đổi `area` có tính lại layout không. [Các test store](https://github.com/AtelierMizumi/riceboot/blob/be164eebab91ed53ef0a0ccfb0489bbc42677e73/src/compositor/store.test.ts) kiểm tra những hành vi này mà không cần mở desktop thật.
-
-## Kết quả test xanh, nhưng có một giới hạn cụ thể
-
-Lệnh đã chạy trong repo ở revision nêu trên:
-
-```bash
-pnpm test
-```
-
-Phần tổng kết của Vitest:
-
-```text
-Test Files  33 passed (33)
-     Tests  182 passed (182)
-```
-
-Đây là bộ test được [cấu hình trong Vite](https://github.com/AtelierMizumi/riceboot/blob/be164eebab91ed53ef0a0ccfb0489bbc42677e73/vite.config.ts), chạy với jsdom. Nó không phải kết quả Playwright/E2E.
-
-Trong test layout có case vùng `50 × 40`, với outer gap `20`, inner gap `10` và sáu cửa sổ. Assertion của case này kiểm tra số kết quả và kích thước mỗi ô ít nhất là một pixel. Nó **không** kiểm tra mọi ô đều nằm trong `area`.
-
-Gọi hàm thật với chính các đầu vào ấy cho kết quả:
-
-| Cửa sổ | x | y | w | h |
-|---|---:|---:|---:|---:|
-| `a` | 20 | 20 | 1 | 1 |
-| `b` | 31 | 20 | 1 | 1 |
-| `c` | 42 | 20 | 1 | 1 |
-| `d` | 53 | 20 | 1 | 1 |
-| `e` | 64 | 20 | 1 | 1 |
-| `f` | 75 | 20 | 1 | 1 |
-
-Các ô `d`, `e`, `f` nằm ngoài cạnh phải của vùng rộng `50`. Bộ test vẫn pass vì kết quả này đáp ứng assertion hiện có: kích thước không âm và không bằng không.
-
-`Math.max(1, ...)` bảo vệ kích thước tối thiểu. Nó không tự bảo vệ điều kiện nằm trong bounds. Hai yêu cầu đó cần được đặt tên và kiểm tra riêng.
-
-Trường hợp này được tái hiện bằng một probe gọi pure function, không phải bằng một sự cố UI đã quan sát. Bài không sửa thuật toán. Nếu yêu cầu của sản phẩm là giữ mọi cửa sổ trong bounds, bước sửa tiếp theo cần bắt đầu bằng test cho yêu cầu đó, rồi chọn chính sách khi không đủ chỗ: giảm gaps, giới hạn tiling hoặc cho phép overflow có chủ đích. Mỗi lựa chọn sẽ thay đổi contract của layout.
-
-## Tự chạy lại hai ví dụ
-
-Chọn một thư mục mới để clone, không dùng lệnh checkout dưới đây trên một working tree đang có thay đổi cần giữ:
-
-```bash
-git clone https://github.com/AtelierMizumi/riceboot.git
-cd riceboot
-git checkout be164eebab91ed53ef0a0ccfb0489bbc42677e73
-pnpm install --frozen-lockfile
-pnpm test
-```
-
-Lượt kiểm chứng cho bài dùng Node.js `v26.13.0` và pnpm `12.9.1`, trên clone đã có dependencies. Chuỗi clone/install ở trên là hướng dẫn tái hiện từ source; lượt này không thực hiện lại một fresh clone và fresh install.
-
-Từ root của repo, chạy đoạn sau bằng Node để gọi cùng hàm TypeScript. Môi trường kiểm chứng hỗ trợ trực tiếp file `.ts`; nếu dùng Node phiên bản khác, cần kiểm tra hỗ trợ TypeScript của phiên bản đó.
+Đoạn dưới đây gọi thẳng hàm layout (pure function, không khởi động VM, không mở GUI). Copy và chạy trong repo cùng phiên bản:
 
 ```bash
 node --input-type=module <<'JS'
 import { dwindle } from './src/compositor/layout/dwindle.ts'
 
 const gaps = { inner: 10, outer: 20 }
-const normal = dwindle(
-  ['a', 'b', 'c'],
-  { x: 0, y: 0, w: 1000, h: 600 },
-  gaps,
-)
-console.log(JSON.stringify(normal, null, 2))
+const normal = dwindle(['a', 'b', 'c'], { x: 0, y: 0, w: 1000, h: 600 }, gaps)
+console.log('normal:\n' + JSON.stringify(normal, null, 2))
 
 const area = { x: 0, y: 0, w: 50, h: 40 }
-const tiny = dwindle(['a', 'b', 'c', 'd', 'e', 'f'], area, gaps)
+const tiny = dwindle(['a','b','c','d','e','f'], area, gaps)
 const outside = Object.entries(tiny)
   .filter(([, r]) =>
     r.x < area.x || r.y < area.y ||
-    r.x + r.w > area.x + area.w ||
-    r.y + r.h > area.y + area.h)
+    r.x + r.w > area.x + area.w || r.y + r.h > area.y + area.h)
   .map(([id]) => id)
-console.log(JSON.stringify({ tiny, outside }, null, 2))
+console.log('tiny-area:\n' + JSON.stringify(tiny, null, 2))
+console.log('outside:', JSON.stringify(outside))
 JS
 ```
 
-`outside` trong lượt kiểm chứng là `["d", "e", "f"]`. Probe chỉ import hàm layout; nó không khởi động VM, sửa config desktop hay mở ứng dụng GUI.
+```
+normal: {"a":{"x":20,"y":20,"w":475,"h":560},"b":{"x":505,"y":20,"w":475,"h":275},"c":{"x":505,"y":305,"w":475,"h":275}}
+tiny-area: {"a":{"x":20,"y":20,"w":1,"h":1},"b":{"x":31,"y":20,"w":1,"h":1},"c":{"x":42,"y":20,"w":1,"h":1},"d":{"x":53,"y":20,"w":1,"h":1},"e":{"x":64,"y":20,"w":1,"h":1},"f":{"x":75,"y":20,"w":1,"h":1}}
+outside: ["d","e","f"]
+```
 
-## Phần chưa thể kết luận từ các test này
+Lời thử này quay trở về hai câu hỏi: (1) tại sao 3 cửa sổ đầu vào vùng, 3 sau lại tràn? (2) assertion hiện hành bảo vệ điều gì — và điều gì lại bị bỏ lại phía sau?
 
-Một layout thuần dữ liệu dễ kiểm tra hơn ảnh chụp desktop, nhưng trải nghiệm sử dụng còn cần lớp kiểm chứng khác. Test hàm không cho biết focus chuột có đúng không, drag có bị giật không hay animation có mượt không. Source [Window.tsx](https://github.com/AtelierMizumi/riceboot/blob/be164eebab91ed53ef0a0ccfb0489bbc42677e73/src/compositor/Window.tsx) nối state với DOM và pointer events; phần đó cần browser checks riêng trước khi đưa ra kết luận về thao tác thực tế.
+## Hàm chia hai phần qui định thứ tự cắt
 
-Phần hữu ích của ví dụ này là có thể bắt đầu từ một bảng tọa độ, viết rõ điều kiện nào cần đúng và kiểm tra chúng trước khi thêm animation. Trường hợp vùng quá nhỏ cũng cho thấy một bộ test xanh đang bảo vệ contract nào, thay vì bảo vệ mọi điều người đọc có thể tự suy ra từ chữ "window manager".
+Nền tảng chỉ hai thao tác: chia ngang hoặc chia dọc — tuỳ theo chiều đang xét. Phần đầu của mỗi lần chia thuộc cửa sổ đang xét; phần còn lại tiếp tục dùng cho cửa sổ tiếp theo.
+
+```typescript
+export function dwindle(ids: string[], area: Rect, gaps: Gaps): Record<string, Rect> {
+  const out: Record<string, Rect> = {}
+  if (!ids.length) return out
+  let cur: Rect = {                          // 1) gốc: nằm trong lề outer
+    x: area.x + gaps.outer,
+    y: area.y + gaps.outer,
+    w: Math.max(1, area.w - 2 * gaps.outer), // 2) rộng = diện tích - 2*outer; tránh < 1
+    h: Math.max(1, area.h - 2 * gaps.outer), // 2) cao tương tự
+  }
+  for (let i = 0; i < ids.length; i++) {
+    if (i === ids.length - 1) { out[ids[i]] = cur; break } // 3) cuối cùng nhận số còn lại
+    let first: Rect, rest: Rect
+    if (cur.w >= cur.h) {                     // 4) rộng hơn -> chia ngang (trái/phải)
+      const w = Math.max(1, Math.floor((cur.w - gaps.inner) / 2)) // 5) phần đầu = floor((w - inner)/2)
+      first = { ...cur, w }
+      rest = { ...cur, x: cur.x + w + gaps.inner, w: Math.max(1, cur.w - w - gaps.inner) } // 6) phần còn lại: tràn lên 1px, không đánh giới hạn mép area
+    } else { ... }                            // 7) cao hơn -> chia dọc
+    out[ids[i]] = first
+    cur = rest
+  }
+  return out
+}
+```
+
+Nhiệm vụ quan trọng nhất trên đây là **số 6**: `rest.w = Math.max(1, cur.w - w - gaps.inner)`. Hàm chỉ đảm bảo giá trị không âm, không đảm bảo `x + w` không vượt `area.x + area.w`. Nên khi diện tích hữu dụng quá hẹp, mỗi vòng lặp lại `cur` di chuyển sang phải (bằng `w + inner`), và những cửa sổ sau cùng bị tràn ra.
+
+> Trích đề mục của hàm từ `dwindle.ts`:
+> > "Hyprland's default dwindle layout: the first window fills the area, each following window splits the previous one in half — side by side when the rect is wide, stacked when it is tall. Sizes never drop below 1px."
+> > — `src/compositor/layout/dwindle.ts`, docstring.
+
+## Cụm hình để thấy thứ tự cắt
+
+Diện tích thực tế sau lề ngoài ở case `50 × 40` chỉ còn `10 × 1` (dài `50 − 40`, rộng `40 − 40`). Từ `x = 20`, mỗi cửa sau chiếm `1 + 10 = 11` px. Kết quả như hình dưới (không tỉ lệ):
+
+```
+y = 20, dùng từ x = 20 đến x = 50
++-----+-----+-----+-----+-----+-----+
+|  a  |  b  |  c  |  d  |  e  |  f  |
++-----+-----+-----+-----+-----+-----+
+x=20 31   42   53*  64*  75*          → d, e, f tràn bên phải (> mép 50)
+```
+
+Mỗi `*` là một cửa sổ nằm ngoài vùng được cho phép, dù hàm vẫn đem ra "dung" theo assertion hiện có.
+
+## State của "cửa sổ" không nằm trong một khối
+
+Biểu tượng `Rect` của `dwindle` qui thụ độc một thứ tự cắt. Những thứ khác trong store của riceboot giữ hạng mục riêng:
+
+| State | Trách nhiệm |
+|---|---|
+| `windows` | Thông tin và mode của mỗi cửa sổ |
+| `order` | Thứ tự tiling theo workspace |
+| `active` | Workspace đang chọn |
+| `focused` | ID đang nhận focus |
+| `area`, `gaps` | Đầu vào hình học |
+
+Khi mở cửa sổ, store thêm ID vào thứ tự workspace hiện tại và focus cửa sổ mới. Gọi `focus(id)` chỉ cập nhật `focused` — không tự đổi `order`. Ngày mà focus, order, area và geometry nằm cùng một khối, bản kiểm soát `dwindle` sẽ khó tách rời, và một thử thách chỉ ảnh hưởng một khối lại sẽ lách rối cả hệ thống.
+
+## Kết bài — điều bạn có thể thử ngay
+
+Quay trở lại đầu bài: khi một test vẫn pass trong khi dữ liệu tràn ra bên ngoài vùng dùng, luôn hỏi ngược: *bộ test bảo vệ điều gì chính xác?* Nếu câu trả lời là "kích thước không âm", thì "cửa sổ nằm trong vùng dùng" vẫn chưa được bảo vệ.
+
+Bạn có thể thử ngay: thay assertion từ các kích thước không âm sang một điều kiện nằm trong bounds trên cả `x` và `y` của `area`. Chọn chính sách khi không đủ chỗ — giảm gaps, giới hạn số ô, hoặc cho phép overflow có chủ đích — sau khi test của condition đó đã mở. Mỗi lựa chọn sẽ đổi contract của layout.
+
+## Verification
+
+- Commit được đọc: `be164eebab91ed53ef0a0ccfb0489bbc42677e73` của `riceboot`.
+- Cụm lệnh `dwindle` được gọi trực tiếp từ file TS; phiên bản Node `v26.13.0`, pnpm `12.9.1`, repo đã cài dependencies.
+- `npx vitest run src/compositor/layout/dwindle.test.ts` → 6 test pass.
+- Toàn bộ Vitest (33 file test) → 182 test pass, trên `jsdom`.
+- Không chạy Playwright/E2E, không thao tác pointer/browser trong lượt kiểm chứng này.
