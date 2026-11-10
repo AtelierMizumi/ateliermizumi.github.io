@@ -61,6 +61,28 @@ Hệ thống hiện muốn chuyển viết ngày trên 5 bài còn lại thành 
 
 Các log nội bộ nằm ở `docs/editorial/evidence/2026-11-09/` giữ nguyên. Các change chưa có stamp thời gian khác sẽ được ghi lại ở commit riêng.
 
+## Run 2026-11-10 — kiểm tra backlog sau bootstrap
+
+Không xuất bản bài mới trong run này; chưa có bài nào trong các mục đã đánh giá vượt đủ evidence gate. Ngày `2026-11-10` đã được gán cho #16; lịch nguyên tắc tối đa một bài/ngày cần được đối chiếu trước khi thêm bài cùng ngày.
+
+| Mục theo thứ tự | Trạng thái | Bằng chứng / bước còn thiếu |
+|---|---|---|
+| #22 | **HOLD — NEEDS_EXPERIMENT** | Đối chiếu source KotobaFlow `8d0fdb29ff101dcb3ea9ea585a753e22ba0e17fa`; hai lần thử browser fixture chưa hoàn thành assertion: `--dump-dom` không đợi async, harness thứ hai bị chặn khi xóa IndexedDB còn connection. Chưa xác minh hit/miss, reload không có backend hoặc import bị ngắt; không suy kết quả từ source. |
+| #18 | **HOLD — NEEDS_AUTHOR, NEEDS_EXPERIMENT** | Backlog yêu cầu xác nhận tác giả và kiểm tra fixture/provider stub/live riêng; chưa có các bằng chứng đó. Không gọi provider trả phí hay đọc secret. |
+| #21 | **HOLD — NEEDS_AUTHOR, NEEDS_EXPERIMENT** | Cần người đủ trình độ kiểm tra câu mẫu và chạy tokenizer với dictionary/version cố định; chưa có xác nhận hoặc kết quả. |
+| #3 | Chưa đủ điều kiện | Ma trận Fcitx5 theo app/toolkit và version chưa được chạy; không thay cấu hình desktop đang dùng để tạo demo. |
+| #30 | **HOLD — NEEDS_AUTHOR, NEEDS_EXPERIMENT** | Chưa xác nhận quyền với học liệu và chưa chạy lab tự soạn trong VM. |
+| #33 | **HOLD — NEEDS_EXPERIMENT** | Backlog yêu cầu sửa lỗi và log round-trip với fixture trước khi hướng dẫn ghi; chưa có. Không chạm collection thật. |
+| #15 | Đã có trong batch bootstrap | Ngày gán `2026-11-13`; không viết lại. |
+| #9 | **HOLD — NEEDS_EXPERIMENT** | Thử so sánh hai workflow cùng base `34f6b12c86e2cce8628c35b902976e595edcbd29`, nhưng A thay bundled JS còn B thay source; B không thực hiện được split hai worker. Vì scope khác và không có integration hai worker, không có so sánh hợp lệ. Không suy ra tốc độ hay chi phí. Thử nghiệm chỉ nằm trong scratch. |
+| #10 | **HOLD — NEEDS_AUTHOR, NEEDS_EXPERIMENT** | Chưa có phiên debug cụ thể được phép chia sẻ và chưa có kiểm tra tái hiện từ note. |
+
+**Next:** #11 theo thứ tự cadence, sau đó #34; trước khi xuất bản cần kiểm tra ngày/cadence và production build. Những mục HOLD có thể được xem lại khi đủ bằng chứng. Không có bài hay verification log giả được thêm vào `_posts/`.
+
+Kiểm tra plan trong staged snapshot: Jekyll production build pass, HTML-Proofer nội bộ pass 243 links / 89 files; snapshot không có Git history nên có warning metadata. Không có article mới được build.
+
+Pages được đọc lại trong run này: `build_type: legacy`, request HTTPS bài #16 trả 404; Actions thành công không xác nhận được public render.
+
 ## Batch B còn lại — đề xuất cadence
 
 Việc xuất bản các bài B còn lại không cần đổi status giả. Lịch dưới đây dùng **mỗi ngày một bài**:
