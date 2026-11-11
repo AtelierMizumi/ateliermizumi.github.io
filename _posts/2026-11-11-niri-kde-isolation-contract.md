@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Niri và KDE sống cùng máy: kiểm tra một hợp đồng isolation có giới hạn"
+title: "Niri và KDE sống cùng máy: hợp đồng isolation chỉ bảo vệ đúng thứ nó liệt kê"
 date: 2026-11-11
 categories: ['linux', 'desktop', 'engineering-case-study']
 tags: ['niri', 'kde-plasma', 'dotfiles', 'isolation', 'testing', 'linux']
-description: "Từ lời hứa giữ nguyên desktop còn lại, biến thành một tập file và key có hash, compare được."
+description: "Sửa một file không nằm trong danh sách, compare vẫn trả OK — và đó không có nghĩa máy không đổi. Đọc check-plasma-intact.sh để thấy một hợp đồng có giới hạn được viết thành mã."
 lang: vi-VN
 comments: false
 toc: true
@@ -13,76 +13,117 @@ verified_on: 2026-11-09
 editorial_status: published
 ---
 
-Cách đơn giản nhất để giữ hai desktop cùng tồn tại là đặt chúng vào hai thư mục riêng. Nhưng một desktop chưa bao giờ chỉ sống trong một thư mục. Nó còn dùng portal, MIME default, theme và gsettings. Nếu một cấu hình đổi nhầm một phần trong số đó, desktop còn lại trông vẫn hoạt động, nhưng cảm giác đã khác trước.
+## Sửa một file không được liệt kê, compare vẫn OK
 
-Trong `dotfiles` ở commit `de1ea53ff5848c8c7fa720ce4f1753a7af23baa7`, lời hứa đó không được giữ bằng bằng chứng hình ảnh. Nó được biến thành một tập file/gsettings có thể snapshot và compare. Bài này đọc cách [check-plasma-intact.sh](https://github.com/AtelierMizumi/dotfiles/blob/de1ea53ff5848c8c7fa720ce4f1753a7af23baa7/scripts/check-plasma-intact.sh) làm việc ở revision đó và đối chiếu với kết quả của một lần chạy fixture bị cô lập.
+Mở một desktop KDE, chỉnh một file trong `~/.config` mà bạn không nghĩ tới, rồi chạy kiểm tra "desktop còn lại có còn nguyên không". Nó trả `OK`. Bạn có tin không?
 
-Phạm vi kiểm chứng là đọc source và chạy stub trong một thư mục tạm. Không có session thật nào bị thay đổi, không có package nào được cài và không có configuration host nào bị đưa lên bài.
+Câu trả lời là: `OK` chỉ nói về một tập file nhất định. Nó không phủ toàn bộ máy. Điều đó không phải lỗi — đó là cách hợp đồng được viết. Cái khó là đọc được hợp đồng đó từ mã.
 
-## Lời hứa được viết thành danh sách
+## Lệnh chạy thật trên một fixture cô lập
 
-`WATCHED_FILES` của script liệt kê tám relative-path, không phải toàn bộ `~/.config`:
+Fixture cô lập của repository tạo `HOME`, `XDG_CONFIG_HOME` và `XDG_STATE_HOME` tạm, đồng thời dùng stub `pgrep` và `gsettings` để không hỏi session hay cấu hình máy thật. Trong một clone riêng của dotfiles tại source revision, chạy:
 
-- `kdeglobals`
-- `kdedefaults/kdeglobals`
-- `mimeapps.list`
-- `gtk-3.0/settings.ini`
-- `gtk-4.0/settings.ini`
-- `xdg-desktop-portal-kderc`
-- `xdg-desktop-portal/portals.conf`
-- `xdg-desktop-portal/kde-portals.conf`
+```bash
+bash tests/test_check_plasma_intact.sh
+```
 
-Hai gsettings keys trong schema `org.gnome.desktop.interface` cũng có trong hợp đồng:
+Probe whitelist riêng cũng dùng script của revision đó và một `XDG_CONFIG_HOME` tạm: chụp snapshot, sửa `kdeglobals` thì compare báo `CHANGED` (exit 1); khôi phục nó rồi sửa `not-watched.txt` thì compare vẫn `OK` (exit 0). Script trực tiếp cần stub `PGREP_BIN` để không phụ thuộc trạng thái session host.
 
-- `color-scheme`
-- `gtk-theme`
+Kết quả suite tại revision nêu trên:
 
-Lệnh `packages` kiểm tra thêm ba package `xdg-desktop-portal-kde`, `plasma-desktop`, `sddm`; cùng với đó script xác nhận mỗi package có `0 missing files` qua pacman trong phân nhánh của nó.
+```
+PASS modified_kdeglobals_exits_1_and_names_file
+PASS unchanged_state_exits_0
+RESULT passed=15 failed=0 skipped=0
+```
 
-Hợp đồng này có hai mặt. Nó đủ hẹp để có thể trả lời rõ ràng khi một file bị thay đổi, nhưng không đủ rộng để nói toàn bộ máy không đổi.
+Probe riêng cho thấy khi một file ngoài danh sách bị sửa, `compare` vẫn `OK`. Lý do không nằm ở hash, mà ở danh sách.
 
-## Snapshot, compare và một cảnh báo quan trọng
+## Hợp đồng nằm trong một mảng
 
-Khi `refuse_if_plasma_running()` thấy tiến trình `plasmashell` đang chạy, script trả exit code `2` thay vì cho `--state-dir` mới snapshot hoặc compare. Lý do nằm ngay trong comment của script: Plasma có thể tự ghi một số file thuộc diện theo dõi, vì vậy comparison qua một Plasma session dễ phát sinh false positive. Cách mà repository kỳ vọng là chạy từ niri session.
+Toàn bộ hợp đồng là tám relative-path, khai báo thẳng trong script:
 
-`cmd_snapshot` ghi hash của tám file và giá trị gsettings vào thư mục state riêng. File không tồn tại được ghi là `MISSING`, không phải lỗi. Gsettings không đọc được được ghi là `UNAVAILABLE`.
+```bash
+WATCHED_FILES=(
+  kdeglobals
+  kdedefaults/kdeglobals
+  mimeapps.list
+  gtk-3.0/settings.ini
+  gtk-4.0/settings.ini
+  xdg-desktop-portal-kderc
+  xdg-desktop-portal/portals.conf
+  xdg-desktop-portal/kde-portals.conf
+)
+```
 
-`cmd_compare` so hash mới với ảnh snapshot, bao gồm cả sự xuất hiện hoặc biến mất của file. Cả hai đều có thể tạo violation nếu giá trị trong hai snapshot khác nhau.
+Hai gsettings keys trong schema `org.gnome.desktop.interface` (`color-scheme`, `gtk-theme`) nằm cùng hợp đồng. Lệnh `packages` kiểm tra thêm ba package `xdg-desktop-portal-kde`, `plasma-desktop`, `sddm`.
 
-Như vậy, kiểm tra được chia thành ba loại:
+```bash
+hash_of() {
+  local path="$CONFIG_HOME/$1"
+  if [[ -f "$path" ]]; then
+    sha256sum <"$path" | cut -d' ' -f1
+  else
+    echo MISSING            # file chưa từng tồn tại cũng là một giá trị, không phải lỗi
+  fi
+}
+```
 
-1. Snapshot: bắt đầu từ trạng thái hiện tại.
-2. Compare: phát hiện thay đổi so với ảnh đã ghi.
-3. Packages/noctalia: kiểm tra package và một tập configuration khác.
+```bash
+while IFS=$'\t' read -r old rel; do
+  new=$(hash_of "$rel")
+  if [[ "$old" != "$new" ]]; then
+    echo "CHANGED: $rel"    # chỉ những path có trong snapshot mới được hỏi
+    violations=1
+  fi
+done <"$state_dir/files.sha256"
+```
 
-## Biên độ của một whitelist
+Ba điểm quyết định nằm ở đây:
 
-Ví dụ, một thay đổi ngoài phạm vi sẽ không làm `compare` báo violation không phải vì điều đó là tốt; đơn giản là file đó không thuộc `WATCHED_FILES`. Ngược lại, nếu Plasma tự ghi chính file trong whitelist, việc so sánh có thể phát sinh false positive. Script cảm nhận giới hạn đó và từ chối chạy trong session của Plasma thay vì ngồi giả vờ so sánh được mọi trạng thái.
+- `WATCHED_FILES` xác định phần file của hợp đồng; snapshot còn theo dõi hai gsettings key.
+- `hash_of` ghi `MISSING` cho file chưa tồn tại — nên file xuất hiện hoặc biến mất cũng là một thay đổi, không phải một lỗi đọc.
+- Vòng `compare` chỉ đọc từng dòng của snapshot. Một file nằm ngoài mảng không bao giờ được hỏi, kể cả khi nó vừa bị sửa.
 
-Đối tượng không bao gồm trong hợp đồng cho bài này vẫn có thể khác với trước đó. Configuration mới của niri ngoài danh sách, service của hệ thống, mount, filesystem và session khác nằm ngoài phép kiểm tra. Một kết quả `OK: Plasma-shared files and gsettings match the snapshot` nên đọc theo đúng phạm vi tên của nó: số file và key đó khớp, không phải không có bất kỳ thay đổi nào trên máy.
+## Luồng snapshot → compare
 
-## Từ fixture kiểm tra tới log thật
+```
+snapshot
+  hash 8 file + 2 gsettings key
+  → state_dir/files.sha256, state_dir/gsettings.txt
 
-Trong bộ test stub của repository, mỗi case được chạy độc lập. [Test này](https://github.com/AtelierMizumi/dotfiles/blob/de1ea53ff5848c8c7fa720ce4f1753a7af23baa7/tests/test_check_plasma_intact.sh) xác nhận logic snapshot/compare phát hiện file thay đổi và không phát hiện file không đổi. Đó là kiểm chứng về việc đọc, hash và so sánh, không phải kiểm chứng về mọi hành vi של compositor.
+compare
+  for each (old_hash, rel) in files.sha256:
+      new_hash = hash_of(rel)        # chỉ rel có trong snapshot
+      differ? → CHANGED: rel
+  for each (key, old_value) in gsettings.txt:
+      differ? → GSETTINGS CHANGED: key
+  no violation → OK
 
-Một workspace fixture được chuẩn bị riêng có thể tái hiện tính chất hẹp này mà không chạm tới host:
+~/.config
+├── kdeglobals            ← trong WATCHED_FILES → được hỏi
+├── mimeapps.list         ← trong WATCHED_FILES → được hỏi
+└── not-watched.txt       ← không có trong mảng → không bao giờ được hỏi
+```
 
-1. Tạo một XDG config/config giả và kiểm tra tính ổn định của hash.
-2. Thay đổi một file trong danh sách watched.
-3. Thay đổi một file không đưa vào danh sách.
-4. Ghi lại cả hai kết quả.
+Khi `refuse_if_plasma_running()` thấy tiến trình `plasmashell` đang chạy, script trả exit code `2` thay vì cho snapshot/compare chạy. Lý do nằm trong comment: Plasma có thể tự ghi một số file thuộc diện theo dõi, nên comparison qua một Plasma session dễ phát sinh false positive. Cách repository kỳ vọng là chạy từ niri session.
 
-Điểm cần lưu ý là bước ba: nếu file ngoài danh sách thay đổi và `compare` không báo lỗi, đó không có nghĩa file đó trống rỗng trên máy thật. Nhưng vì nó không thuộc tập watched, compare không có cơ sở để báo lỗi. Tính chất này không bị hạ thấp thành “zero leakage tuyệt đối”.
+## Trích dẫn gốc
 
-## Từ một hợp đồng nhỏ tới bài học chung
+> "Prove that a rice install left KDE Plasma alone."
+> — `scripts/check-plasma-intact.sh`, header comment.
 
-Kit thiết kế ở đây có thể mang sang một hệ thống khác::
+Câu đó nói rõ mục tiêu: không phải "chứng minh máy không đổi", mà là "chứng minh bản cài rice không động vào phần của Plasma".
 
-1. Liệt kê mặt được bảo vệ.
-2. Định nghĩa trạng thái gốc để compare.
-3. Cho phép kết quả `MISSING` và `UNAVAILABLE`.
-4. Đánh dấu rõ sự khác biệt giữa kiểm tra đổi thành công và kiểm tra không đổi.
+## Kết bài — hợp đồng có tên thay vì lời hứa trừu tượng
 
-Câu hỏi tiếp theo cần kiểm tra, nhất là bản chất của hợp đồng này, không phải là “chúng ta có thể giữ mọi file không đổi không?”, mà là “những file nào có ý nghĩa bảo vệ và những thay đổi nào mới thực sự gây nguy hiểm cho desktop còn lại?” Việc quyết định đôi khi không nằm trong script.
+Một kết quả `OK` chỉ đúng trong phạm vi tên của nó. Câu hỏi đúng không phải "có giữ được mọi file không?", mà là "những file nào có ý nghĩa bảo vệ, và thay đổi nào mới thực sự gây nguy hiểm cho desktop còn lại?". Việc quyết định đó đôi khi không nằm trong script — nằm ở mảng `WATCHED_FILES`.
 
-Bài tiếp theo đọc một state machine cụ thể đi kèm: *Một nút đổi shell phải biết tự quay lại* — bài đó sẽ được đọc theo thứ tự đọc của series.
+Bạn có thể thử trong một clone riêng: thêm một path vào `WATCHED_FILES`, tạo snapshot mới, thay đổi file đó rồi compare. Hợp đồng vẫn nhỏ, nhưng giờ bao gồm thêm path này.
+
+## Verification
+
+- Đọc script và test tại `de1ea53ff5848c8c7fa720ce4f1753a7af23baa7`; diff hai file này với revision hiện tại `c58814f48833726870518ff4cff0fd9bd5982513` rỗng.
+- Chạy `bash tests/test_check_plasma_intact.sh` tại source revision: `RESULT passed=15 failed=0 skipped=0`.
+- Chạy probe cô lập bằng script đúng revision: không đổi → `OK` (exit 0); sửa `kdeglobals` → `CHANGED` (exit 1); file ngoài whitelist thay đổi → `OK` (exit 0). `PGREP_BIN` và `GSETTINGS_BIN` được trỏ tới stub/false; không động tới session thật hay cấu hình host.
+- Bài chỉ khẳng định phạm vi của snapshot/compare, không suy rộng từ đó thành bằng chứng toàn bộ máy bất biến.
