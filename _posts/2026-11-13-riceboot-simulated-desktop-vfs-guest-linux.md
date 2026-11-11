@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "riceboot: desktop mô phỏng, filesystem của browser và một guest Linux là ba chuyện khác nhau"
+title: "riceboot: desktop mô phỏng, filesystem của browser và guest Linux là ba chuyện khác nhau"
 date: 2026-11-13
 categories: ['build-log', 'frontend', 'case-study']
 tags: ['riceboot', 'browser', 'linux', 'v86', 'filesystem', 'architecture']
-description: "Đọc cách riceboot ghép simulator, VFS trong browser và guest Linux bằng v86 để phân biệt chúng lần lượt là bề mặt phản hồi, bề mặt lưu trữ và phần thực thi bản chất."
+description: "Bạn thấy một desktop Arch trong browser và tưởng Linux đang chạy. Nhưng trong source có ba lớp khác nhau — và chỉ một lớp là Linux thật."
 lang: vi-VN
 comments: false
 toc: true
@@ -13,28 +13,100 @@ verified_on: 2026-11-09
 editorial_status: published
 ---
 
-Cách branding của một web desktop giả dễ bị hiểu nhầm. Người dùng nhìn thấy UI của window manager trong browser, bấm terminal và tưởng toàn bộ hệ điều hành Arch đang chạy trong tab. Nhưng **riceboot** có ba lớp khác nhau có thể được nhìn thấy trong source: simulator UI, filesystem mô phỏng và guest Linux được boot bằng [v86](https://github.com/copy.sh/v86).
+## Mở một tab, thấy một desktop Arch
 
-Bài này đọc commit `be164eebab91ed53ef0a0ccfb0489bbc42677e73` của [riceboot](https://github.com/AtelierMizumi/riceboot) để tách ba lớp đó. Bài [window manager bằng TypeScript](/posts/window-manager-typescript-state-to-rectangles/) trước đó đã đi sâu vào layout state machine của riceboot; bài này đọc từ file hệ thống và browser quanh state machine đó.
+Bạn mở một tab, thấy một desktop Arch, gõ `fastfetch` vào terminal. Cảm giác đó rất thuyết phục. Nhưng trong source của **riceboot** có ba lớp khác nhau, và chỉ một lớp là Linux thật.
 
-Phạm vi kiểm chứng là đọc source và kiểm tra runtime logic thuần, không phải một demo VM boot hay trải nghiệm browser đầy đủ.
+Nhầm lẫn này không ngẫu nhiên: UI của window manager, filesystem mô phỏng và guest Linux đều hiện ra trong cùng một tab. Để nói đúng, phải tách chúng ra.
 
-## Ba lớp và ranh giới của chúng
+## Kiểm tra VFS bằng test
 
-**Lớp simulator** là phần React/Zustand hiển thị desktop. Store của `src/compositor/store.ts` giữ danh sách cửa sổ, workspace, focus và mode như ở bài trước. Chức năng này hiển thị bề mặt phản hồi; nó không chứa kernel hay driver Linux.
+Chạy suite VFS tại đúng revision source:
 
-**Lớp filesystem mô phỏng** được triển khai trong `vfs/index.ts`. [Source khởi tạo file system](https://github.com/AtelierMizumi/riceboot/blob/be164eebab91ed53ef0a0ccfb0489bbc42677e73/vfs/index.ts) cho phép desktop simulator lưu/lấy file không cần chạy kernel thật. Nó là bề mặt lưu trữ: ghi file, đọc lại và xem chúng xuất hiện trong UI.
+```bash
+pnpm exec vitest run src/kernel/vfs/
+```
 
-**Lớp guest Linux** tách hoàn toàn khỏi hai lớp trên. Trong [tools/build-image/build.ts](https://github.com/AtelierMizumi/riceboot/blob/be164eebab91ed53ef0a0ccfb0489bbc42677e73/tools/build-image/build.ts), image guest được build trước và boot qua v86 trong browser; kết quả của việc boot là một Linux thật nhỏ ở cấp guest. Đồng thời đáp án về cấu tạo của lớp simulator không cần dùng kernel của guest.
+```text
+Test Files  4 passed (4)
+     Tests  31 passed (31)
+```
 
-## Vì sao ranh giới này quan trọng
+Đây là kết quả của test suite, không phải một probe Node độc lập. Source cho biết memory VFS được khởi tạo từ `Tree`, đánh dấu `persistent: false`, còn `createVfs()` thử IndexedDB trước rồi mới fallback sang memory.
 
-Liên kết ba lớp này với nhau để viết đúng. Đề xuất tuyên bố “chạy Arch trong browser” cần bằng chứng rõ ràng. Image trên thực tế được build từ Alpine trong tools/build-image/build.ts, không phải Arch. Simulator là của người dùng tự viết trong TypeScript. Guest layer là Linux thật, nhưng nằm ở mức VM guest, không phải mức hệ thống chủ của người dùng.
+## Ba lớp, ba trách nhiệm
 
-## Hệ quả thực tiễn
+Tầng filesystem mô phỏng được tạo bằng một hàm có fallback rõ ràng:
 
-Việc phân biệt lớp simulator với lớp guest cũng cho thấy khi người dùng muốn mount một drive mới trong browser, cần quyết định cụ thể thứ được mount là gì: simulator VFS hay guest Linux. Hai đường đi có thể giống nhau ở bề ngoài, nhưng không nhất thiết phải giống nhau ở kernel.
+```typescript
+export async function createVfs(): Promise<Vfs> {
+  try {
+    return await createIdbVfs()      // ưu tiên IndexedDB
+  } catch {
+    return createMemoryVfs()         // fallback khi IndexedDB lỗi
+  }
+}
+```
 
-## Nhìn lại sự khác biệt giữa ranh giới lớp bề mặt và phần hard-core
+Hợp đồng của tầng này nằm trong `Vfs`:
 
-Câu hỏi tốt hơn cho desktop mô phỏng không phải “nó có chạy Linux không?”, vì đáp án thuộc về guest layer. Câu hỏi hữu ích hơn là: “phần nào tôi đang nói tới: simulator, VFS hay guest?” Giữ câu trả lời bằng đúng layer của nó, và tuyên bố là chính xác.
+```typescript
+export interface Vfs {
+  readFile(p: string): Promise<string>
+  writeFile(p: string, data: string): Promise<void>
+  mkdir(p: string, opts?: { recursive?: boolean }): Promise<void>
+  readdir(p: string): Promise<string[]>
+  stat(p: string): Promise<Stat>
+  exists(p: string): Promise<boolean>
+  rm(p: string, opts?: { recursive?: boolean }): Promise<void>
+  watch(prefix: string, cb: (e: WatchEvent) => void): () => void
+  reset(): Promise<void>
+  readonly persistent: boolean       // có sống qua reload không
+}
+```
+
+Ba điểm quyết định:
+
+- **`createVfs()` chọn IndexedDB, fallback về memory.** Hai backend cùng một hợp đồng, khác nhau ở `persistent`.
+- **`persistent` cho biết backend có hỗ trợ lưu bền hay không.** Memory VFS không giữ dữ liệu sau khi trang đóng; IndexedDB được thiết kế để lưu qua các lần tải lại, tùy chính sách lưu trữ của browser.
+- **Tầng này không có kernel.** Nó chỉ là một cấu trúc dữ liệu có `readFile`/`writeFile`/`mkdir`.
+
+Hai phần còn lại gồm `src/compositor/store.ts` (simulator UI), `tools/build-image/build.ts` (build guest image) và `src/vm/VmSession.ts` (khởi tạo v86 trong browser).
+
+## Sơ đồ ba lớp
+
+```
+┌──────────────────────────────────────────────┐
+│ simulator UI   src/compositor/store.ts        │  bề mặt phản hồi
+│   windows, order, active, focused            │  không có kernel
+├──────────────────────────────────────────────┤
+│ VFS            src/kernel/vfs/                │  bề mặt lưu trữ
+│   readFile / writeFile / mkdir / watch       │  IndexedDB hoặc memory
+├──────────────────────────────────────────────┤
+│ guest Linux                                  │  thực thi ở cấp guest
+│   build-image: Alpine ISO + ext2 image       │  chuẩn bị image
+│   VmSession.ts: v86                          │  khởi tạo emulator
+└──────────────────────────────────────────────┘
+```
+
+Simulator và VFS có thể được kiểm thử mà không cần boot guest. Bài này chưa kiểm tra guest hoạt động độc lập với giao diện.
+
+## Trích dẫn gốc
+
+> "This is a riced Arch Linux desktop running in your browser."
+> — `src/kernel/vfs/index.ts`, nội dung `README.txt` mặc định trong VFS.
+
+Câu đó là mô tả xuất hiện trong VFS. Nó không chứng minh guest là Arch: image được build từ Alpine. Tầng simulator và VFS cũng không tự biến thành một hệ điều hành Linux đang chạy.
+
+## Kết bài — hỏi đúng tầng
+
+Câu hỏi tốt hơn cho một desktop mô phỏng không phải "nó có chạy Linux không?", vì câu trả lời thuộc về tầng guest. Câu hỏi hữu ích hơn là: "phần nào tôi đang nói tới: simulator, VFS hay guest?".
+
+Bạn có thể đọc test của memory VFS và IndexedDB VFS để xem cùng một interface được kiểm tra qua hai backend như thế nào.
+
+## Verification
+
+- Source đọc tại commit `be164eebab91ed53ef0a0ccfb0489bbc42677e73`.
+- `pnpm exec vitest run src/kernel/vfs/` chạy tại source revision `be164eebab91ed53ef0a0ccfb0489bbc42677e73`: 4 file test, 31 test pass.
+- Đọc `src/kernel/vfs/index.ts`, `src/kernel/vfs/memory.ts`, `src/compositor/store.ts` và `tools/build-image/build.ts`: VFS IndexedDB/memory và UI compositor là các tầng riêng; image guest được build từ Alpine `alpine-virt-3.24.2-x86.iso`, không phải Arch.
+- Không chạy probe Node độc lập, không boot VM thật và không chạy trải nghiệm browser đầy đủ trong lượt kiểm chứng này.

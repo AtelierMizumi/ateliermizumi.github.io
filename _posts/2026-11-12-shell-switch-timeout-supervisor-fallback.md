@@ -4,7 +4,7 @@ title: "Một nút đổi shell phải biết tự quay lại: timeout, supervis
 date: 2026-11-12
 categories: ['linux', 'desktop', 'engineering-case-study']
 tags: ['niri', 'quickshell', 'shell', 'fallback', 'timeout', 'testing']
-description: "Đọc state machine chuyển shell trong dotfiles: xác nhận, timeout, thứ tự dừng supervisor và đường quay lại."
+description: "Trong switch-shell.sh, timeout được xử lý như từ chối thử shell mới. Đọc state machine và test stub, không nhầm chúng với một lần rollback trên desktop thật."
 lang: vi-VN
 comments: false
 toc: true
@@ -13,61 +13,105 @@ verified_on: 2026-11-09
 editorial_status: published
 ---
 
-Cách đơn giản nhất để đổi shell là viết file chọn shell rồi reload config. Trong một desktop rice, điều đó có thể giúp người dùng thử một giao diện mới, nhưng đặt ra một câu hỏi khó hơn: người dùng thử xong thì sao? Nếu shell mới lỗi, ai sẽ đưa người dùng về trạng thái cũ?
+## Không trả lời cũng là một lựa chọn
 
-Trong `dotfiles` ở commit `de1ea53ff5848c8c7fa720ce4f1753a7af23baa7`, [switch-shell.sh](https://github.com/AtelierMizumi/dotfiles/blob/de1ea53ff5848c8c7fa720ce4f1753a7af23baa7/scripts/switch-shell.sh) không chỉ viết `mizu` vào `~/.config/niri/shell`. Nó mở một cửa sổ xác nhận có thời gian đếm ngược, và trạng thái “không chọn gì” được xử lý như một lựa chọn từ chối. Bài này đọc state machine đó và đối chiếu với bộ test stub của repository.
+Nếu shell mới gặp lỗi trong lúc thử, người dùng có thể không kịp xác nhận. Trong `switch-shell.sh`, phản hồi hết thời gian chờ được xử lý như từ chối; test stub kiểm tra rằng file lựa chọn trở về `noctalia`. Đây là hành vi được mô tả và kiểm thử trong script, không phải kết quả của một lần chuyển shell quan sát trên desktop thật.
 
-Phạm vi kiểm chứng là đọc source và chạy stub trong sandbox. Không có session thật nào bị chuyển đổi, không có shell nào được thay thế và không có configuration host nào được đưa lên bài.
+Điểm đáng chú ý là "không trả lời" đã được định nghĩa thành một lựa chọn: từ chối. Điều đó nghe như chi tiết nhỏ, nhưng nó quyết định script sẽ làm gì khi người dùng không xác nhận.
 
-## State machine trước khi nói nút bấm
+## Lệnh chạy thật: dry-run và suite
 
-State thực tế mà người dùng nhìn thấy là `noctalia` đang chạy. Khi chọn `mizu`, script làm ba việc:
+Chạy đúng script tại commit `de1ea53ff5848c8c7fa720ce4f1753a7af23baa7`:
 
-1. Ghi `mizu` vào file chọn shell ở `~/.config/niri/shell`.
-2. Reload niri và khởi động shell mới.
-3. Mở cửa sổ xác nhận trong 60 giây để người dùng giữ lại hoặc quay lại.
+```bash
+bash scripts/switch-shell.sh --dry-run
+```
 
-Nếu người dùng nhập lựa chọn bắt đầu bằng `N` hoặc `n`, script viết lại `noctalia` và reload. Nếu không có input trong thời hạn mà `read -t` định trước, script cũng coi đó là lựa chọn từ chối. Nếu `MIZU_CONFIRM_SECONDS` được đặt, script dùng giá trị đó thay cho mặc định.
+```
+==> Checking for package conflicts...
+==> [dry-run] Preflight checks passed.
+==> [dry-run] Would install packages: quickshell ttf-material-symbols-variable brightnessctl cliphist wlsunset
+==> [dry-run] Would merge branch smart-shell into main
+==> [dry-run] Complete (no changes made).
+```
 
-Như vậy, “không phản hồi” không phải là trạng thái chờ vô hạn. Nó có một kết thúc đã định trước.
+Dry-run chạy hết preflight rồi dừng, không sửa gì. Bộ test stub của repository chạy thật:
+
+```bash
+bash tests/test_switch_shell.sh
+```
+
+```
+PASS t_dry_run_runs_no_mutating_commands
+PASS t_conflicting_package_aborts_before_sudo
+PASS t_rollback_works_without_quickshell_and_keeps_settings
+PASS t_confirm_timeout_reverts_to_noctalia
+PASS t_confirm_yes_keeps_mizu
+PASS t_the_shell_supervisor_is_stopped_before_the_shell_on_every_switch
+PASS t_installs_the_packages_the_shell_runs_tools_from
+PASS t_never_installs_leftover_staged_packages_over_the_repo_ones
+PASS t_main_checkout_merges_smart_shell_before_stowing
+PASS t_failed_merge_stops_before_stow_and_switch
+PASS t_refuses_to_stow_from_a_worktree
+RESULT passed=11 failed=0 skipped=0
+```
+
+Hai test `t_confirm_timeout_reverts_to_noctalia` và `t_confirm_yes_keeps_mizu` kiểm tra hai nhánh timeout và xác nhận giữ shell.
 
 ## Thứ tự dừng supervisor
 
-Một điểm dễ bỏ qua nhất nằm trong `reload_session()`. Script[stops supervisor](https://github.com/AtelierMizumi/dotfiles/blob/de1ea53ff5848c8c7fa720ce4f1753a7af23baa7/scripts/switch-shell.sh#L45-L47) có tên `shell-start` trước khi nó dừng shell; sau đó nó mới dừng `quickshell`/`qs` hoặc `noctalia` tùy vào shell đích. Lý do nằm ngay trong comment của source: `shell-start` sẽ khởi động lại một shell chết với trạng thái lỗi. Nếu bạn dừng shell trước, supervisor sẽ thấy đó là trạng thái lỗi và có thể chạy lại đúng thứ bạn vừa muốn dừng.
+Điểm dễ bỏ qua nhất nằm trong `reload_session()`. Đây là sơ đồ rút gọn, không phải listing nguyên văn; phần dừng supervisor và xử lý shell được mô tả bằng comment:
 
-Thứ tự này giải thích vì sao bài báo case study dành nhiều thời gian cho state machine hơn là nút bấm:
+```bash
+reload_session() {
+  local target_shell="$1"
+  if command -v niri >/dev/null 2>&1; then
+    niri msg action load-config-file >/dev/null 2>&1 || true
+  fi
+  # Dừng shell-start trước; xem giải thích bên dưới.
+  # Sau đó xử lý tiến trình theo target_shell.
+}
+```
 
-- **`noctalia`**: trạng thái fallback chạy bình thường.
-- **`mizu` (pending)**: shell mới đã được ghi vào file chọn shell và đang chạy, nhưng chưa được xác nhận.
-- **`mizu` (committed)**: người dùng chọn giữ lại hoặc script được gọi với `--yes`.
-- **`reverting`**: ghi `noctalia` và chuyển lại sau khi script đọc đáp án không tích cực.
-- **`noctalia` (đã về lại)**: trạng thái kết thúc an toàn của quá trình thử.
+Hai điểm quyết định:
 
-Một người dùng thử shell mới có thể nhìn thấy màn hình tạm thời của shell lỗi. Điểm khác biệt là máy không cần thao tác tay thứ hai để thoát khỏi trạng thái đó.
+- **Supervisor được xử lý trước shell.** Comment trong source nêu `shell-start` tự dừng shell rồi thoát; pattern được neo để khớp command line của supervisor, tránh tìm rộng theo tên file.
+- **Target shell được dừng/khởi động sau cùng**, tuỳ theo `target_shell`.
 
-## Timeout, confirm và rollback
+## State machine
 
-Ba đường ra từ state pending cũng cần được tách riêng:
+```
+noctalia (trạng thái ban đầu theo luồng trong script)
+   │ chọn mizu
+   ▼
+mizu (pending)  ── ghi 'mizu' vào ~/.config/niri/shell, reload
+   │
+   ├─ người dùng giữ lại ─────────────► mizu (committed)
+   │
+   ├─ người dùng từ chối (N/n) ───────► reverting → noctalia
+   │
+   └─ read -t hết thời hạn, không trả lời ► reverting → noctalia
+```
 
-- Người dùng giữ lại: script thoát thành công.
-- Người dùng từ chối: script viết lại `noctalia`, reload và thoát với mã lỗi; đây cũng là cách tránh cho shell lỗi tồn tại như lựa chọn ngầm.
-- Người dùng không trả lời: `read` hết timeout, script ghi lại `noctalia` và reload.
+Mặc định thời hạn là 60 giây; script cho phép đổi bằng `MIZU_CONFIRM_SECONDS`.
 
-Một chế độ `--rollback` riêng cũng viết `noctalia` mà không nhắc lại lựa chọn. Đó là lối thoát cho người muốn đưa session về mặc định nhanh hơn.
+Trong luồng xác nhận của script, cả ba nhánh đều có đích. Test stub mô phỏng timeout và kiểm tra file lựa chọn thành `noctalia`; nó không chứng minh việc rollback đã diễn ra trong một phiên desktop thật.
 
-## Kiểm chứng mà script tự cung cấp
+## Trích dẫn gốc
 
-Trong [tests/test_switch_shell.sh](https://github.com/AtelierMizumi/dotfiles/blob/de1ea53ff5848c8c7fa720ce4f1753a7af23baa7/tests/test_switch_shell.sh), mỗi test tạo sandbox có lệnh sudo/pacman/git/stow/niri/pkill giả. Lần kiểm chứng ngày 09/11/2026 chạy toàn bộ suite này và nhận 11 pass trên 11 test.
+> "shell-start restarts a shell that dies with an error, so it goes first: it stops its shell and exits."
+> — `scripts/switch-shell.sh`, comment trong `reload_session()`.
 
-Hai test liên quan trực tiếp tới logic ở đây:
+## Kết bài — timeout là một trạng thái, không phải một lỗ
 
-- Timeout xác nhận quay lại `noctalia`.
-- `reload_session` phải dừng supervisor trước shell trên mọi lần chuyển.
+Nếu một tính năng có thể ở trạng thái pending, đừng để timeout bị coi là không có kết quả. Làm cho timeout trở thành một trạng thái có đích rõ ràng; nếu không, người dùng phải chờ đợi hoặc tự đoán điều gì sẽ xảy ra tiếp theo.
 
-Các test này kiểm chứng tính đúng đắn của stub: xác nhận trạng thái cuối và thứ tự lệnh, không phải một demo chuyển shell trên desktop thật.
+Nếu muốn tìm hiểu nhánh rollback riêng, hãy đọc phần `--rollback` trong source và test tương ứng; đừng chạy script chuyển shell trên session đang dùng chỉ để thử bài viết này.
 
-## Từ một nút đổi shell tới mô hình cho tính năng khác
+## Verification
 
-Mô hình này nói lên một điều rộng hơn nút bấm: nếu một tính năng có thể ở trạng thái pending, đừng để timeout bị coi là không có kết quả. Làm cho timeout trở thành một trang thái có đích rõ ràng, nếu không người dùng phải chờ đợi hoặc tự đoán điều gì sẽ xảy ra tiếp theo.
-
-Nhưng bài này vẫn không đo tốc độ chuyển shell, không chứng minh độ mượt của animation, và không thay việc kiểm tra một shell thật trên session. Nó chỉ cho thấy câu hỏi rollback đã được trả lời trong script bằng mô hình trạng thái, và các test stub bảo vệ thứ tự đó.
+- Script đọc tại commit `de1ea53ff5848c8c7fa720ce4f1753a7af23baa7`.
+- `bash scripts/switch-shell.sh --dry-run` chạy thật, exit 0, không sửa file trên máy.
+- `bash tests/test_switch_shell.sh` chạy thật: 11 pass, 0 fail, trên bộ stub (sudo/pacman/git/stow/niri/pkill giả).
+- Test kiểm chứng tính đúng đắn của stub: xác nhận trạng thái cuối và thứ tự lệnh, không phải demo chuyển shell trên desktop thật.
+- Không thay đổi session thật, không thay shell, không đưa config host lên bài.
